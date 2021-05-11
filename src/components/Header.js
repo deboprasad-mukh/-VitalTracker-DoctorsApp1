@@ -90,7 +90,7 @@ export default function Header() {
           <Button 
           variant="outlined"
           className={classes.button} 
-          onClick={()=>alert('i am clicked')}>
+          onClick={()=> history.push('/view')}>
           <Search className={classes.icon1} /> Signin with Google
           </Button>
           <Button 
