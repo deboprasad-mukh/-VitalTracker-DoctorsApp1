@@ -32,6 +32,7 @@ export default function View() {
     return (
         <Container className={classes.root}>
             <Paper component={Box} width="90%"  mx="auto" p={4}>
+            
             <ArrowBackIcon onClick={()=>history.push('/front')}/>
             <Typography variant='h5' align="center">Pateint Details</Typography>
                 <Box component="form" mt={2} className={classes.pateint}>
