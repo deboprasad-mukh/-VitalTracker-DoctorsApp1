@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Login from './Login/Login';
 import Page from './Admin/Page';
 import View from './Doctor/View';
+import DoctorHome from './Doctor/DoctorHome';
 
 export default function App() {
     return (
@@ -15,6 +16,7 @@ export default function App() {
                 <Route exact path="/login" component={()=><Login/>}/>
                 <Route exact path="/page" component={()=><Page/>}/>
                 <Route exact path="/view" component={()=><View/>}/> 
+                <Route exact path="/drview" component={()=><DoctorHome/>}/> 
                 </Switch>
             </BrowserRouter> 
         </div>

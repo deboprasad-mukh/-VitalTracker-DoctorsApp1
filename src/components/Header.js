@@ -78,7 +78,7 @@ export default function Header() {
         <div className={classes.container}>
           <h1 className={classes.title}>
             "The presence of <br />
-            the <span className={classes.colorText}>Doctor</span> is the  <br/>
+            the <span >Doctor</span> is the  <br/>
             beginning of the cure"
           </h1>
           <Scroll to="place-to-visit" smooth={true}>
@@ -90,7 +90,7 @@ export default function Header() {
           <Button 
           variant="outlined"
           className={classes.button} 
-          onClick={()=> history.push('/view')}>
+          onClick={()=> history.push('/drview')}>
           <Search className={classes.icon1} /> Signin with Google
           </Button>
           <Button 
