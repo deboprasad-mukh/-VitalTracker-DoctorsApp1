@@ -54,7 +54,7 @@ export default function Page() {
         <Container className={classes.root}>
         
             <Paper  component={Box} className={classes.ppr} width="60%"  mx="auto" p={4}>
-            <ArrowBackIcon onClick={()=>history.push('/front')}/>
+            <ArrowBackIcon onClick={()=>history.push('/')}/>
             <Typography  className={classes.add}>Add or Edit</Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={6}>

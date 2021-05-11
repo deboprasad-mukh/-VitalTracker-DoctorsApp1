@@ -65,8 +65,9 @@ export default function Header() {
     //console.log("response : -",response.profileObj.name)
     axios.get(`http://localhost:4000/doctor/${response.profileObj.email}`).then(res=>{
       if(res.data){
-        
-        history.push("/drview")
+        localStorage.setItem("useremail",response.profileObj.email)
+        localStorage.setItem("username",response.profileObj.name)
+        history.push(`/drview/${response.profileObj.name}`)
       }
       else{
         alert("not register doctor")

@@ -33,7 +33,7 @@ export default function View() {
         <Container className={classes.root}>
             <Paper component={Box} width="90%"  mx="auto" p={4}>
             
-            <ArrowBackIcon onClick={()=>history.push('/front')}/>
+            <ArrowBackIcon onClick={()=>history.goBack()}/>
             <Typography variant='h5' align="center">Pateint Details</Typography>
                 <Box component="form" mt={2} className={classes.pateint}>
                     <TextField label="Pateint Name" />
