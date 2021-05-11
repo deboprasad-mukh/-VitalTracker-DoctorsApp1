@@ -11,12 +11,12 @@ import AddPatient from './Admin/AddPatient/AddPatient';
 import Editpatient from './Admin/AddPatient/Editpatient';
 
 export default function App() {
+    
     return (
         <div>
             <BrowserRouter>
                 <Switch>
-                <Route exact path="/" component={()=><Redirect to="/front"/>}/>
-                <Route exact path="/front" component={()=><Front/>} />
+                <Route exact path="/" component={()=><Front/>}/>
                 <Route exact path="/login" component={()=><Login/>}/>
                 <Route exact path="/page" component={()=><Page/>}/>
                 <Route exact path="/view" component={()=><View/>}/> 

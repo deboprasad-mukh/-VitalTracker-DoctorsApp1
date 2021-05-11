@@ -43,8 +43,16 @@ export default function Login(){
     }
 
     const handleClick = () => {
-        alert('submit')
-        history.push('/page')
+        //alert('submit')
+        //history.push('/page')
+        if(user.password=="admin"){
+            alert('Login successful')
+            history.push('/page')
+        }
+        else{
+            alert('Not matched user')
+            
+        }
     }
 
 
@@ -54,12 +62,12 @@ export default function Login(){
     return(
         <Grid>
             <Paper elevation={10} style={paperStyle}>
-            <ArrowBackIcon onClick={()=>history.push('/front')}/>
+            <ArrowBackIcon onClick={()=>history.push('/')}/>
                 <Grid align='center' className={classes.root}>
                      <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-                    <h2>Sign In</h2>
+                    <h2>Admin</h2>
                 </Grid>
-                <TextField label='Email' className={classes.emailId} placeholder='Enter Email id'name="email" onChange={handleChange} type="email" fullWidth required/>
+                {/*<TextField label='Email' className={classes.emailId} placeholder='Enter Email id'name="email" onChange={handleChange} type="email" fullWidth required/>*/}
                 <TextField label='Password' className={classes.pswd} placeholder='Enter password'name="password" onChange={handleChange} type='password' fullWidth required/>
                 <Button type='button' onClick={handleClick} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
             </Paper>

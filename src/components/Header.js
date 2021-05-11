@@ -5,6 +5,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Search, Account } from '@trejgun/material-ui-icons-google'
 import { Link as Scroll } from 'react-scroll';
 import { useHistory } from 'react-router';
+import GoogleLogin from 'react-google-login';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +60,24 @@ export default function Header() {
   useEffect(() => {
     setChecked(true);
   }, []);
+  const responseGoogleonSuccess=(response)=>{
+    //console.log("response : -",response.profileObj.email)
+    //console.log("response : -",response.profileObj.name)
+    axios.get(`http://localhost:4000/doctor/${response.profileObj.email}`).then(res=>{
+      if(res.data){
+        
+        history.push("/drview")
+      }
+      else{
+        alert("not register doctor")
+      }
+    })
+  }
+
+  const responseGoogleonFailure=(response)=>{
+    console.log(response)
+  }
+  
   return (
     <div className={classes.root} id="header">
       <AppBar className={classes.appbar} elevation={0}>
@@ -87,12 +107,17 @@ export default function Header() {
             </IconButton>
           </Scroll>
           <Box>
-          <Button 
-          variant="outlined"
-          className={classes.button} 
-          onClick={()=> history.push('/drview')}>
-          <Search className={classes.icon1} /> Signin with Google
-          </Button>
+          
+            <GoogleLogin
+                    clientId="922681220910-vlntououmi8oa4sj9nl5m29m64b23qkk.apps.googleusercontent.com"
+                    buttonText="Login with Google"
+                    onSuccess={responseGoogleonSuccess}
+                    onFailure={responseGoogleonFailure}
+                    cookiePolicy={'single_host_origin'}
+                    >
+                    Signin with Google
+            </GoogleLogin>
+          
           <Button 
           variant="outlined"
           className={classes.button} 

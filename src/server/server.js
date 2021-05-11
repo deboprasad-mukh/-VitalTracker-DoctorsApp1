@@ -63,6 +63,21 @@ app.get('/doctor/:email',(req,res)=>{
         })
     })
 });
+app.put('/editdoctor/:id',(req,res)=>{
+    Doctor.findByIdAndUpdate(req.params.id, {
+        name :req.body.name,
+        registrationId :req.body.registrationId,
+        email :req.body.email,
+        specialist :req.body.specialist,
+         
+    },{new : true}).then(doctor=>{
+        res.send(doctor)
+    }).catch((err)=>{
+        res.send({
+            message: "some error happened"
+        })
+    })
+});
 
 
 const PatientSchema = new mongoose.Schema({
