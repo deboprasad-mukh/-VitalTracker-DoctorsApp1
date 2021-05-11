@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
-import './AddDoc.css'
+import './AddDoc.css';
+import axios from 'axios';
+
 const AddDoctor = () => {
     const[doctor,setDoctor] = useState({
         "name":"",
-        "regid":"",
+        "registrationId":"",
         "email":"",
-        "specialization":"",
+        "specialist":"",
     })
 
     let name,value
@@ -18,6 +20,29 @@ const AddDoctor = () => {
         })
         console.log(doctor)
     }
+
+    const param=new URLSearchParams();
+  const handleSubmit=()=>{
+   param.append("name", doctor.name); 
+   param.append("registrationId", doctor.registrationId);
+   param.append("email", doctor.email);
+   param.append("specialist", doctor.specialist);
+    axios.post("http://localhost:4000/newDoctor", param,{
+        headers:{
+            'content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(res=>{
+        window.alert("Successfully Added")
+        console.log("ok")
+        setDoctor({
+            "name":"",
+            "registrationId":"",
+            "email":"",
+            "specialist":""
+        })
+    })
+    
+}
     return(
         
         <section className="heading">
@@ -30,7 +55,7 @@ const AddDoctor = () => {
                         <label htmlFor="name" className="label">Name :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="reg" className="input-text" name="regid" value={doctor.regid} onChange={handleDocInput}/>
+                        <input type="text" id="reg" className="input-text" name="registrationId" value={doctor.registrationId} onChange={handleDocInput}/>
                         <label htmlFor="reg" className="label">Registration Id :</label>
                     </div>
                     <div className="form-field col-lg-12">
@@ -38,12 +63,12 @@ const AddDoctor = () => {
                         <label htmlFor="email" className="label">Email :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="special" className="input-text" name="specialization" value={doctor.specialization} onChange={handleDocInput}/>
+                        <input type="text" id="special" className="input-text" name="specialist" value={doctor.specialist} onChange={handleDocInput}/>
                         <label htmlFor="special" className="label">Specialization :</label>
                     </div>
 
                     <div className="form-field col-lg-12">
-                        <input type="submit" class="submit-btn" value ="Add"/>
+                        <input type="submit" class="submit-btn" value ="Add" onClick={handleSubmit}/>
                     </div>
                 </div>
             </div>

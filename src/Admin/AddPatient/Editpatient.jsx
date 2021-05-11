@@ -1,8 +1,8 @@
-import React,{useEffect, useState} from 'react';
-import './AddPatient.css';
-import axios from 'axios';
-const AddPatient = () => {
-    
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+
+export default function Editpatient() {
+    const [patientlist,setpatientlist]= useState([])
     const [doc,setdoc]= useState([])
     const [patient, setPatient] = useState({
         "name":"",
@@ -16,12 +16,21 @@ const AddPatient = () => {
         "bodyTemp":"",
         "rapidCoronaTest":""
     })
+    const [patientid,setpatientid]=useState({
+        patientID: ''
+    })
     useEffect(()=>{
         axios.get("http://localhost:4000/doctorlist").then(res=>{
             setdoc(res.data)
         })
     },[])
+    useEffect(()=>{
+        axios.get("http://localhost:4000/patientlist").then(res=>{
+            setpatientlist(res.data)
+        })
+    },[])
     console.log(doc)
+    console.log(patientlist)
     
     let name,value
     const handlePatientInput = (e) =>{
@@ -39,8 +48,14 @@ const AddPatient = () => {
             date: e.target.value
         })
     }
-    console.log(patient.date)
-    console.log(typeof(patient.date))
+    const handlePatientID=(e)=>{
+        name = e.target.name
+        value = e.target.value
+        setpatientid({
+            [name] : value
+        })
+    }
+    console.log(patientid.patientID)
 
   const param=new URLSearchParams();
 
@@ -56,7 +71,7 @@ const AddPatient = () => {
    param.append("bloodPressure", patient.bloodPressure);
    param.append("bodyTemp", patient.bodyTemp);
    param.append("rapidCoronaTest", patient.rapidCoronaTest);
-    axios.post("http://localhost:4000/newpatientadd", param,{
+    axios.put(`http://localhost:4000/editpatient/${patientid.patientID}`, param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }
@@ -80,10 +95,19 @@ const AddPatient = () => {
 console.log(patient)
     return(
         <section className="heading">
-            <h1 className="title">Add Patient</h1>
+            <h1 className="title">Edit Patient</h1>
 
             <div className="container">
                 <div className="add-doc-form row">
+                    <div className="form-field col-lg-6">
+
+                        <select className="choose-doc" name="patientID" value={patientid.patientID} onChange={handlePatientID}>
+                            <option class="input-choice">Select patient</option>
+                            {patientlist.map(item=><option class="input-choice" value={item?._id}>{item?.name}</option>)}
+
+                        </select>
+                        <label htmlFor="patientid" className="label-doctor">Select patient :</label>
+                    </div>
                     <div className="form-field col-lg-12">
                         <input type="text" id="name" className="input-text" name="name" value={patient.name} onChange={handlePatientInput}/>
                         <label htmlFor="name" className="label" >Name :</label>
@@ -98,7 +122,7 @@ console.log(patient)
                     </div>
                     <div className="form-field col-lg-12">
                     
-                    <select className="choose-doc" name="doctorid" value={patient.doctorid} onChange={handlePatientInput}>
+                        <select className="choose-doc" name="doctorid" value={patient.doctorid} onChange={handlePatientInput}>
                             <option class="input-choice">Select doctor</option>
                             {doc.map(item=><option class="input-choice" value={item?._id}>{item?.name}</option>)}
                             
@@ -131,19 +155,6 @@ console.log(patient)
                         <label htmlFor="patientid" className="label">Rapid Corona Test :</label>
                     </div>
                     
-                    {/* <div className="form-field col-lg-12">
-                    <div className="form-field col-lg-12">
-                        <input type="text" id="special" className="input-text"/>
-                        <label htmlFor="patientid" className="label">Patient Id :</label>
-                    </div>
-                    {/* <div className="form-field col-lg-12">
-                        <select className="choose-doc">
-                            <option class="input-choice">Select doctor</option>
-                            <option class="input-choice">Select doctor</option>
-                            <option class="input-choice">Select doctor</option>
-                        </select>
-                        <label htmlFor="patientid" className="label">Doctor Appointed :</label>
-                    </div> */}
 
                     <div className="form-field col-lg-12">
                         <input type="submit" class="submit-btn" value ="Add" onClick={handleSubmit}/>
@@ -156,4 +167,3 @@ console.log(patient)
     )
 }
 
-export default AddPatient;

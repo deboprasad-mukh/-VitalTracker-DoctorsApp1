@@ -99,6 +99,15 @@ app.post("/newpatientadd" ,(req,res)=>{
         })
     })
 })
+app.get('/patientlist',(req,res)=>{
+    Patient.find().then(data=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send({
+            message: "some error happened"
+        })
+    })
+});
 app.get("/selectedpatient/:doctorid", (req,res)=>{
     Patient.find({doctorid : req.params.doctorid}).then(data=>{
         res.send(data)
