@@ -19,7 +19,7 @@ export default function App() {
                 <Route exact path="/login" component={()=><Login/>}/>
                 <Route exact path="/page" component={()=><Page/>}/>
                 <Route exact path="/view" component={()=><View/>}/> 
-                <Route exact path="/drview/:name" component={(props)=><DoctorHome profilename={props.match.params.name}/>}/>
+                <Route exact path="/drview/:id" component={(props)=><DoctorHome profileid={props.match.params.id}/>}/>
                 
                 <Route exact path="/adddoctor" component={()=><AddDoctor/>}/> 
                 <Route exact path="/editdoctor" component={()=><Editdoctor/>}/>

@@ -66,8 +66,8 @@ export default function Header() {
     axios.get(`http://localhost:4000/doctor/${response.profileObj.email}`).then(res=>{
       if(res.data){
         localStorage.setItem("useremail",response.profileObj.email)
-        localStorage.setItem("username",response.profileObj.name)
-        history.push(`/drview/${response.profileObj.name}`)
+        localStorage.setItem("username",res.data.name)
+        history.push(`/drview/${res.data._id}`)
       }
       else{
         alert("not register doctor")
