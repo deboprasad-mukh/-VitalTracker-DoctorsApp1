@@ -130,7 +130,7 @@ app.get("/selectedpatient/:doctorid", (req,res)=>{
         res.send(err)
     })
 })
-app.get("/selectedpatient/:id", (req,res)=>{
+app.get("/patient/:id", (req,res)=>{
     Patient.findById(req.params.id).then(data=>{
         res.send(data)
     }).catch(err=>{

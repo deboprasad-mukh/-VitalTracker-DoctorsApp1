@@ -18,9 +18,10 @@ export default function Front() {
   const history= useHistory()
   const userEmail=localStorage.getItem("useremail")
   const userName=localStorage.getItem("username")
+  const userId=localStorage.getItem("userid")
   useEffect(()=>{
     if(userEmail){
-        history.push(`/drview/${userName}`)
+        history.push(`/drview/${userId}`)
        console.log("user exists")
     }
     else{

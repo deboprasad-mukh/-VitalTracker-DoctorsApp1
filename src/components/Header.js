@@ -66,8 +66,9 @@ export default function Header() {
     axios.get(`http://localhost:4000/doctor/${response.profileObj.email}`).then(res=>{
       if(res.data){
         localStorage.setItem("useremail",response.profileObj.email)
-        localStorage.setItem("username",response.profileObj.name)
-        history.push(`/drview/${response.profileObj.name}`)
+        localStorage.setItem("username",res.data.name)
+        localStorage.setItem("userid",res.data._id)
+        history.push(`/drview/${res.data._id}`)
       }
       else{
         alert("not register doctor")
@@ -114,8 +115,7 @@ export default function Header() {
                     buttonText="Login with Google"
                     onSuccess={responseGoogleonSuccess}
                     onFailure={responseGoogleonFailure}
-                    cookiePolicy={'single_host_origin'}
-                    >
+                    cookiePolicy={'single_host_origin'}>
                     Signin with Google
             </GoogleLogin>
           

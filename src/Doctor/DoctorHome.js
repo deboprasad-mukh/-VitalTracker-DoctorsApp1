@@ -50,23 +50,43 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function DoctorHome() {
+export default function DoctorHome(props) {
   const history =useHistory();
   const classes = useStyles();
   const [users, setUsers]=useState([])
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [date, changeDate] = useState(new Date());
-  const [filterFn, setFilterFn] = useState({fn: users => {return users; }})
-
-  const loadUsers = async () => {
-    const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-    setUsers(res.data);
-  };
+  const [daypatient,setdaypatient]=useState([]);
+  const [searchpatientlist,setsearchpatientlist]=useState([])
+  const [searchpatient,setsearchpatient]=useState("")
+  const profilename=localStorage.getItem("username");
+  
 
   useEffect(()=>{
-    loadUsers()
+    axios.get(`http://localhost:4000/selectedpatient/${props.profileid}`).then(res=>{
+      setUsers(res.data)
+    })
   }, []);
+  useEffect(()=>{
+    let patients=users.filter(item=>item.date.includes(date))
+    setdaypatient(patients)
+    
+  },[date])
+
+  useEffect(()=>{
+    setsearchpatientlist(daypatient) 
+  },[daypatient])
+  useEffect(()=>{
+    if(searchpatient==""){
+      setsearchpatientlist(daypatient)
+    }
+    else{
+      let patients=daypatient.filter(item=>item.name.includes(searchpatient))
+    setsearchpatientlist(patients)
+    }
+     
+  },[searchpatient])
 
   const onChangePage = (e, nextPage) => {
     setPage(nextPage)
@@ -77,26 +97,26 @@ export default function DoctorHome() {
   }
 
   const handleSearch = (e) => {
-    let target = e.target;
-      setFilterFn({
-        fn:users => {
-          if(target.value == "")
-          return users;
-          else
-          return users.filter(item => item.name.includes(target.value))
-        }
-      })
-
+      setsearchpatient(e.target.value)
   }
+  const logout=()=>{
+    localStorage.clear()
+    history.push("/")
+  }
+  const handledatechange=(e)=>{
+    changeDate(e.target.value)
+  }
+  
+  console.log(searchpatientlist)
   return (
     <Container className={classes.root}>
     <Paper component={Box} width="90%"  mx="auto" p={5}>
-    <PowerSettingsNewIcon className={classes.logbtn}/>
+    <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
     <Typography className={classes.logtxt}>Logout</Typography>
     <Box className={classes.typ}>
-    <Typography variant="h5">Dr.</Typography>
+    <Typography variant="h5">Dr. {profilename}</Typography>
     </Box>
-    <TextField className={classes.datee} type="date"/>
+    <TextField className={classes.datee} type="date" value={date} onChange={handledatechange}/>
     <TextField
     className={classes.srch}
      label="Search"
@@ -106,7 +126,7 @@ export default function DoctorHome() {
     InputProps={
       {endAdornment:(<InputAdornment position="end"><SearchIcon/></InputAdornment>)}
       }
-      onChange={{handleSearch}}
+      onChange={handleSearch}
       />
 
       <TableContainer component={Paper} width='100%' className={classes.ppr}>
@@ -118,9 +138,9 @@ export default function DoctorHome() {
           </TableHead>
           <TableBody>
           {
-            users.slice(page * rowsPerPage,page * rowsPerPage + rowsPerPage).map(user => (
+            searchpatientlist.slice(page * rowsPerPage,page * rowsPerPage + rowsPerPage).map(user => (
               <TableRow>
-                 <TableCell onClick={()=>history.push('/view')} className={classes.ppr}>{user.name}</TableCell>
+                 <TableCell onClick={()=>history.push(`/view/${user?._id}`)} className={classes.ppr}>{user.name}</TableCell>
                </TableRow>
                
             ))
