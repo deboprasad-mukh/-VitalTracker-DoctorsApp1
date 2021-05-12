@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
   logbtn: {
     color: 'red',
     float: 'right',
+    transform: "scale(2)",
+    marginBottom:'1%'
   },
   logtxt: {
     fontSize:11,

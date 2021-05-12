@@ -9,6 +9,7 @@ import AddDoctor from './Admin/AddDoctor/AddDoctor';
 import Editdoctor from './Admin/AddDoctor/Editdoctor';
 import AddPatient from './Admin/AddPatient/AddPatient';
 import Editpatient from './Admin/AddPatient/Editpatient';
+import PrintPdf from './Doctor/PrintPdf';
 
 export default function App() {
     const [currentdate,setcurrentdate]= useState("")
@@ -39,6 +40,7 @@ export default function App() {
                 <Route exact path="/editdoctor" component={()=><Editdoctor/>}/>
                 <Route exact path="/addpatient" component={()=><AddPatient/>}/>
                 <Route exact path="/editpatient" component={()=><Editpatient/>}/>
+                <Route exact path="/printpdf/:id" component={(props)=><PrintPdf patientid={props.match.params.id}/>}/>
                 </Switch>
             </BrowserRouter> 
         </div>

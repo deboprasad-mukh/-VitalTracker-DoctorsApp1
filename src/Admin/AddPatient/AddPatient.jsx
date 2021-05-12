@@ -45,6 +45,10 @@ const AddPatient = () => {
   const param=new URLSearchParams();
 
   const handleSubmit=(e)=>{
+    if((!patient.name) || (!patient.age) || (!patient.date) ||(!patient.doctorid) || (!patient.reasonForappointment) || (!patient.heartRate) || (!patient.oxygenLevel) || (!patient.bloodPressure) || (!patient.bodyTemp) || (!patient.rapidCoronaTest)){
+        alert("please fill the details properly")
+        return
+      }
     e.preventDefault();
    param.append("name", patient.name); 
    param.append("age", patient.age);

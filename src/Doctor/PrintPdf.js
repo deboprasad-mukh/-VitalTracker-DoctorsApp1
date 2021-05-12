@@ -1,15 +1,29 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import  React, { useEffect, useState } from "react";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import axios from "axios";
 
-const App = () => {
+const PrintPdf = (props) => {
   const pdfExportComponent = React.useRef(null);
+  const {patientid}=props
+  const [patient,setpatient]=useState({})
+  const [patientd,setpatientd]=useState([])
+  useEffect(()=>{
+    axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
+        setpatient(res.data)
+      })
+  },[])
+  useEffect(()=>{
+    axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
+      setpatientd(res.data)
+    })
+  },[])
   return (
-    <div>
+    <div className="container">
       <div className="example-config">
         <button
           className="k-button"
+          style={{float: "right",marginTop:"2%" , transform: "scale(2)"}}
           onClick={() => {
             if (pdfExportComponent.current) {
               pdfExportComponent.current.save();
@@ -21,18 +35,24 @@ const App = () => {
       </div>
 
       <PDFExport paperSize="A4" margin="2cm" ref={pdfExportComponent}>
-        <div>
+        <div style={{marginTop: "6%"}}>
           <center><h3>Pateint Details</h3></center> <br/><br/>
-          <h4>Pateint Name :  </h4><br/><br/>
-          <h6>Heart Rate :   </h6><br/>
-          <h6>SpO2 Level :  </h6><br/>
-          <h6>Blood Pressure :  </h6><br/>
-          <h6>Temperature :  </h6><br/>
-          <h6>RCT :  </h6><br/>
+          <h4>Pateint Name : {patient.name} </h4><br/>
+          <h5>Pateint Age : {patient.age} </h5><br/><br/>
+          <h6>Heart Rate :   {patient.heartRate}</h6><br/>
+          <h6>SpO2 Level :  {patient.oxygenLevel}</h6><br/>
+          <h6>Blood Pressure :  {patient.bloodPressure}</h6><br/>
+          <h6>Temperature :  {patient.bodyTemp}°F</h6><br/>
+          <h6>RCT :  {patient.rapidCoronaTest}</h6><br/>
+          <h6>Reason :  {patient.reasonForappointment}</h6><br/>
           <hr/>
-          <h5>Date: </h5><br/><br/>
-          <h6>Medicines : </h6><br/>
-          <h6>Suggestions : </h6>
+          {patientd.map(item=>
+            <div>
+              <h5>Date: {item?.date}</h5><br/>
+            <p>Medicines : {item?.medicines}</p>
+            <p>Suggestions : {item?.comments}</p>
+            </div>
+            )}
 
         </div>
 
@@ -41,4 +61,4 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.querySelector("my-app"));
+export default PrintPdf;
