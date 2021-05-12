@@ -3,6 +3,8 @@ import { Container, Paper, Box, Typography, TableContainer, Table, TableBody, Ta
 import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import SearchIcon from '@material-ui/icons/Search';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import { useHistory } from 'react-router';
 //import DateFnsUtils from '@date-io/date-fns'
 //import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 //import useAutocomplete from '@material-ui/lab/useAutocomplete'
@@ -10,7 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth:'40vw',
+  maxWidth:'80vw',
     height: "100vh",
     paddingTop: theme.spacing(5),
     justifyContent: "center",
@@ -29,13 +31,27 @@ const useStyles = makeStyles((theme) => ({
   typ: {
     display: 'flex',
     justifyContent: 'space-between',
-    flex: 1,
+    
     marginBottom: "3%",
     marginTop: "10%"
+  },
+  logbtn: {
+    color: 'red',
+    float: 'right',
+  },
+  logtxt: {
+    fontSize:11,
+    float: 'right',
+    marginLeft:'100%',
+    marginBottom:'6%'
+  },
+  datee: {
+    float: 'right'
   }
 }))
 
 export default function DoctorHome() {
+  const history =useHistory();
   const classes = useStyles();
   const [users, setUsers]=useState([])
   const [page, setPage] = useState(0);
@@ -75,10 +91,12 @@ export default function DoctorHome() {
   return (
     <Container className={classes.root}>
     <Paper component={Box} width="90%"  mx="auto" p={5}>
+    <PowerSettingsNewIcon className={classes.logbtn}/>
+    <Typography className={classes.logtxt}>Logout</Typography>
     <Box className={classes.typ}>
     <Typography variant="h5">Dr.</Typography>
-    <TextField type="date"/>
     </Box>
+    <TextField className={classes.datee} type="date"/>
     <TextField
     className={classes.srch}
      label="Search"
@@ -91,7 +109,7 @@ export default function DoctorHome() {
       onChange={{handleSearch}}
       />
 
-      <TableContainer component={Paper} width='40%' className={classes.ppr}>
+      <TableContainer component={Paper} width='100%' className={classes.ppr}>
         <Table>
           <TableHead>
             <TableRow>
@@ -102,7 +120,7 @@ export default function DoctorHome() {
           {
             users.slice(page * rowsPerPage,page * rowsPerPage + rowsPerPage).map(user => (
               <TableRow>
-                 <TableCell onClick={()=>alert('i am clicked')} className={classes.ppr}>{user.name}</TableCell>
+                 <TableCell onClick={()=>history.push('/view')} className={classes.ppr}>{user.name}</TableCell>
                </TableRow>
                
             ))

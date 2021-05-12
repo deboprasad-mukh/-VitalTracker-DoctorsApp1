@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +25,19 @@ const useStyles = makeStyles((theme) => ({
         fontSize: theme.typography.pxToRem(17),
         fontWeight: theme.typography.fontWeightRegular,
       },
+      txt: {
+          fontSize: 16
+      },
+      logtxt: {
+        fontSize:11,
+        float: 'right',
+        marginLeft:'100%',
+        marginBottom:'6%'
+      },
+      logbtn: {
+        color: 'red',
+        float: 'right',
+      },
 }))
 
 export default function View() {
@@ -31,20 +45,21 @@ export default function View() {
     const history = useHistory();
     return (
         <Container className={classes.root}>
-            <Paper component={Box} width="90%"  mx="auto" p={4}>
-            
+            <Paper component={Box} width="100%"  mx="auto" p={4}>
+            <PowerSettingsNewIcon className={classes.logbtn}/>
+            <Typography className={classes.logtxt}>Logout</Typography>
             <ArrowBackIcon onClick={()=>history.goBack()}/>
-            <Typography variant='h5' align="center">Pateint Details</Typography>
+            <Typography variant='h6' align="center">Pateint Details</Typography>
                 <Box component="form" mt={2} className={classes.pateint}>
-                    <TextField label="Pateint Name" />
+                    <Typography className={classes.txt} >Pateint Name : </Typography>
                 </Box>
-                <Paper component={Box} width="80%" mx="auto" p={4} mt={2}>
+                <Paper component={Box} width="100%" mx="auto" p={4} mt={2}>
                      <Box component="form">
-                         <TextField label="Heart Rate" margin="normal" fullWidth/>
-                         <TextField label="SpO2 Level" margin="normal" fullWidth/>
-                         <TextField label="Blood Pressure" margin="normal" fullWidth/>
-                         <TextField label="Temperature" margin="normal" fullWidth/>
-                         <TextField label="RCT" margin="normal" fullWidth/>
+                         <Typography className={classes.txt} label="Heart Rate" margin="normal" fullWidth>Heart Rate : </Typography>
+                         <Typography className={classes.txt} label="SpO2 Level" margin="normal" fullWidth>SpO2 Level : </Typography>
+                         <Typography className={classes.txt} label="Blood Pressure" margin="normal" fullWidth>Blood Pressure : </Typography>
+                         <Typography className={classes.txt} label="Temperature" margin="normal" fullWidth>Temperature : </Typography>
+                         <Typography className={classes.txt} label="RCT" margin="normal" fullWidth>RCT : </Typography>
                          <TextField label="Medicines" margin="normal" fullWidth multiline/>
                          <TextField label="Suggestion" margin="normal" fullWidth multiline/>
                      </Box>
