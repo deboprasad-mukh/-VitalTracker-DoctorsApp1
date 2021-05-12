@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography, Container, Paper, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: theme.typography.fontWeightRegular,
       },
       txt: {
-          fontSize: 16
+          fontSize: 16,
+          fontWeight: "bold"
       },
       logtxt: {
         fontSize:11,
@@ -40,49 +42,120 @@ const useStyles = makeStyles((theme) => ({
       },
 }))
 
-export default function View() {
+export default function View(props) {
     const classes = useStyles();
     const history = useHistory();
+    const {currentdate,patientid} = props
+    const [patient,setpatient] = useState({})
+    const [daywisedetails,setdaywisedetails] =useState([])
+    const [update,setupdate]= useState({
+      medicine:"",
+      suggestion:""
+    })
+    var param=new URLSearchParams();
+    useEffect(()=>{
+      axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
+        setpatient(res.data)
+      })
+    },[])
+
+    useEffect(()=>{
+      axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
+        setdaywisedetails(res.data)
+      })
+    },[])
+    const logout=()=>{
+      localStorage.clear()
+      history.push("/")
+    }
+    let name, value
+    const updatechange=(e)=>{
+      name=e.target.name
+      value=e.target.value
+      setupdate({
+        ...update,
+        [name] : value
+      })
+    }
+    const updateclick=()=>{
+      param.append("patientid", patientid);
+      param.append("comments", update.suggestion);
+      param.append("medicines", update.medicine); 
+      param.append("date", currentdate);
+      
+      axios.post("http://localhost:4000/adddailyPatient", param,{
+        headers:{
+            'content-Type': 'application/x-www-form-urlencoded'
+        }
+        }).then(res=>{
+        
+          axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
+          setdaywisedetails(res.data)
+          })
+        })
+        setupdate({
+          medicine:"",
+          suggestion:""
+        })
+        param=new URLSearchParams();
+    }
+    console.log(currentdate)
     return (
         <Container className={classes.root}>
             <Paper component={Box} width="100%"  mx="auto" p={4}>
-            <PowerSettingsNewIcon className={classes.logbtn}/>
+            <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
             <Typography className={classes.logtxt}>Logout</Typography>
             <ArrowBackIcon onClick={()=>history.goBack()}/>
-            <Typography variant='h6' align="center">Pateint Details</Typography>
+            <Typography variant='h4' align="center">Pateint Details</Typography>
                 <Box component="form" mt={2} className={classes.pateint}>
-                    <Typography className={classes.txt} >Pateint Name : </Typography>
+                    <Typography variant="h5" >Pateint Name : {patient.name}</Typography>
                 </Box>
                 <Paper component={Box} width="100%" mx="auto" p={4} mt={2}>
                      <Box component="form">
-                         <Typography className={classes.txt} label="Heart Rate" margin="normal" fullWidth>Heart Rate : </Typography>
-                         <Typography className={classes.txt} label="SpO2 Level" margin="normal" fullWidth>SpO2 Level : </Typography>
-                         <Typography className={classes.txt} label="Blood Pressure" margin="normal" fullWidth>Blood Pressure : </Typography>
-                         <Typography className={classes.txt} label="Temperature" margin="normal" fullWidth>Temperature : </Typography>
-                         <Typography className={classes.txt} label="RCT" margin="normal" fullWidth>RCT : </Typography>
-                         <TextField label="Medicines" margin="normal" fullWidth multiline/>
-                         <TextField label="Suggestion" margin="normal" fullWidth multiline/>
+                         <Typography className={classes.txt} label="Heart Rate" margin="normal" fullWidth>Heart Rate : {patient.heartRate}</Typography>
+                         <Typography className={classes.txt} label="SpO2 Level" margin="normal" fullWidth>SpO2 Level : {patient.oxygenLevel}</Typography>
+                         <Typography className={classes.txt} label="Blood Pressure" margin="normal" fullWidth>Blood Pressure : {patient.bloodPressure}</Typography>
+                         <Typography className={classes.txt} label="Temperature" margin="normal" fullWidth>Temperature : {patient.bodyTemp}°F</Typography>
+                         <Typography className={classes.txt} label="RCT" margin="normal" fullWidth>RCT : {patient.rapidCoronaTest}</Typography>
+                         <Typography className={classes.txt} label="Reason" margin="normal" fullWidth>Reason : {patient.reasonForappointment}</Typography>
+                         <TextField label="Medicines" margin="normal" fullWidth multiline name="medicine" value={update.medicine} onChange={updatechange}/>
+                         <TextField label="Suggestion" margin="normal" fullWidth multiline name="suggestion" value={update.suggestion} onChange={updatechange}/>
                      </Box>
                 </Paper>
                 <Box mt={2} className={classes.btn}>
-                    <Button variant="contained"  color="primary" fullWidth>Add</Button>
+                    <Button variant="contained"  color="primary" fullWidth onClick={()=>updateclick()}>Add</Button>
                 </Box>
                 <Box mt={3}>
-                    <Accordion>
-                         <AccordionSummary
-                           expandIcon={<ExpandMoreIcon />}
-                           aria-controls="panel1a-content"
-                           id="panel1a-header"
-                         >
-                           <Typography className={classes.heading}>11/05/2021</Typography>
-                         </AccordionSummary>
-                         <AccordionDetails>
-                           <Typography>
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                             sit amet blandit leo lobortis eget.
+                    {daywisedetails.map(item=>
+                      
+                      <Accordion>
+                       <AccordionSummary
+                         expandIcon={<ExpandMoreIcon />}
+                         aria-controls="panel1a-content"
+                         id="panel1a-header"
+                       >
+                         <Typography className={classes.heading}>{item?.date}</Typography>
+                       </AccordionSummary>
+                       <AccordionDetails>
+                        <ul>
+                         <li>
+                         <Typography>
+                           Medicines :- {item?.medicines}
                            </Typography>
-                         </AccordionDetails>
-                    </Accordion>
+                         </li>
+                         
+
+                         <li>
+                         <Typography>
+                         Suggestion :- {item?.comments}
+                         </Typography>
+                         </li>
+                         </ul>
+                       </AccordionDetails>
+                      </Accordion>
+                      
+                    )}
+                    
                 </Box>
             </Paper>
         </Container>

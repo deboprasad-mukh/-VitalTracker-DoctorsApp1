@@ -67,6 +67,7 @@ export default function Header() {
       if(res.data){
         localStorage.setItem("useremail",response.profileObj.email)
         localStorage.setItem("username",res.data.name)
+        localStorage.setItem("userid",res.data._id)
         history.push(`/drview/${res.data._id}`)
       }
       else{

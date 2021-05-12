@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Front from './Front';
 import { BrowserRouter, Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import Login from './Login/Login';
@@ -11,6 +11,20 @@ import AddPatient from './Admin/AddPatient/AddPatient';
 import Editpatient from './Admin/AddPatient/Editpatient';
 
 export default function App() {
+    const [currentdate,setcurrentdate]= useState("")
+    useEffect(()=>{
+      var date= new Date();
+      var dates=""
+      var d=(date.getMonth()+1).toString()
+      if(d.length==1){
+         dates=date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+date.getDate()
+      }
+      else{
+         dates=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
+      }
+      setcurrentdate(dates)
+    },[])
+    console.log("patient date= ",currentdate)
     return (
         <div>
             <BrowserRouter>
@@ -18,7 +32,7 @@ export default function App() {
                 <Route exact path="/" component={()=><Front/>}/>
                 <Route exact path="/login" component={()=><Login/>}/>
                 <Route exact path="/page" component={()=><Page/>}/>
-                <Route exact path="/view" component={()=><View/>}/> 
+                <Route exact path="/view/:id" component={(props)=><View currentdate={currentdate} patientid={props.match.params.id}/>}/> 
                 <Route exact path="/drview/:id" component={(props)=><DoctorHome profileid={props.match.params.id}/>}/>
                 
                 <Route exact path="/adddoctor" component={()=><AddDoctor/>}/> 
