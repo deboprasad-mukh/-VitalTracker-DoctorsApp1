@@ -114,8 +114,7 @@ export default function Header() {
                     buttonText="Login with Google"
                     onSuccess={responseGoogleonSuccess}
                     onFailure={responseGoogleonFailure}
-                    cookiePolicy={'single_host_origin'}
-                    >
+                    cookiePolicy={'single_host_origin'}>
                     Signin with Google
             </GoogleLogin>
           
