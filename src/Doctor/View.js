@@ -6,15 +6,19 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import axios from 'axios';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100vw",
-        height: "70vh",
+        height: "50vh",
         paddingTop: theme.spacing(5),
+        
     },
     pateint: {
-        marginLeft:"10%"
+        marginLeft:"10%",
+        display: "flex",
+        justifyContent: "space-between"
     },
     btn: {
         justifyContent: "flex-end",
@@ -39,7 +43,13 @@ const useStyles = makeStyles((theme) => ({
       logbtn: {
         color: 'red',
         float: 'right',
+        transform: "scale(2)",
+        marginBottom:'1%'
       },
+      pdf:{
+        transform: "scale(2)",
+        color: "blue"
+      }
 }))
 
 export default function View(props) {
@@ -102,13 +112,14 @@ export default function View(props) {
     console.log(currentdate)
     return (
         <Container className={classes.root}>
-            <Paper component={Box} width="100%"  mx="auto" p={4}>
+            <Paper component={Box} width="100%"  mx="auto"  p={4}>
             <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
             <Typography className={classes.logtxt}>Logout</Typography>
             <ArrowBackIcon onClick={()=>history.goBack()}/>
             <Typography variant='h4' align="center">Pateint Details</Typography>
                 <Box component="form" mt={2} className={classes.pateint}>
-                    <Typography variant="h5" >Pateint Name : {patient.name}</Typography>
+                    <Typography variant="h5" >Patient Name : {patient.name}</Typography>
+                    <PictureAsPdfIcon className={classes.pdf} onClick={()=>history.push(`/printpdf/${patientid}`)}/>
                 </Box>
                 <Paper component={Box} width="100%" mx="auto" p={4} mt={2}>
                      <Box component="form">
