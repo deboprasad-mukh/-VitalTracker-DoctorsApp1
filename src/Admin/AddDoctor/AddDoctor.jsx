@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import './AddDoc.css';
 import axios from 'axios';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 
 const AddDoctor = () => {
 const[doctor,setDoctor] = useState({
@@ -67,6 +69,7 @@ const handleSubmit=()=>{
 return(
 
         <section className="heading">
+        <ArrowBackIcon onClick={()=>history.push('/')}/>
         <h1 className="title">Add Doctor</h1>
 
         <div className="container">
