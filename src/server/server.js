@@ -215,7 +215,13 @@ app.post('/adddailyPatient',(req,res)=>{
         })
     })
 });
-
+app.get("/eachdaypatient/:id", (req,res)=>{
+    DailyPatient.findById(req.params.id).then(data=>{
+        res.send(data)
+    }).catch(err=>{
+        res.send(err)
+    })
+})
 app.get('/dailypatientdetails/:patientid',(req,res)=>{
     DailyPatient.find({patientid : req.params.patientid}).then(dailypatient=>{
         res.send(dailypatient)

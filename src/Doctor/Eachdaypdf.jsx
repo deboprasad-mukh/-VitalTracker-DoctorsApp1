@@ -14,34 +14,26 @@ import {
 } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card'
 
-import { useHistory } from "react-router";
-
-const PrintPdf = (props) => {
-  const history=useHistory()
-  const pdfExportComponent = React.useRef(null);
-  const {patientid}=props
-  const [patient,setpatient]=useState({})
-  const [patientd,setpatientd]=useState([])
-  const userEmail=localStorage.getItem("useremail")
-  const userId=localStorage.getItem("userid")
-  useEffect(()=>{
-    if(!userEmail){
-        history.push("/")
-       console.log("user exists")
-    }
-  },[userEmail])
-  useEffect(()=>{
-    axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
-        setpatient(res.data)
-      })
-  },[])
-  useEffect(()=>{
-    axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
-      setpatientd(res.data)
-    })
-  },[])
-  return (
-    <div className="container">
+export default function Eachdaypdf(props) {
+    const {eachdaypatientid} = props
+    const pdfExportComponent = React.useRef(null);
+    const patientid = localStorage.getItem("patientid")
+    const [patient,setpatient] = useState({})
+    const [eachdaypatient,seteachdaypatient] = useState({})
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
+          setpatient(res.data)
+        })
+      },[])
+      useEffect(()=>{
+        axios.get(`http://localhost:4000/eachdaypatient/${eachdaypatientid}`).then(res=>{
+            seteachdaypatient(res.data)
+        })
+      },[])
+      console.log(patient)
+      console.log(eachdaypatient)
+    return (
+        <div className="container">
       <div className="example-config">
         <button
           className="k-button"
@@ -84,19 +76,17 @@ const PrintPdf = (props) => {
 
 
           <hr/>
-          {patientd.map(item=>
+          
             <div>
-              <h5>Date: {item?.date}</h5><br/>
-            <p>Medicines : {item?.medicines}</p>
-            <p>Suggestions : {item?.comments}</p>
+              <h5>Date: {eachdaypatient?.date}</h5><br/>
+            <p>Medicines : {eachdaypatient?.medicines}</p>
+            <p>Suggestions : {eachdaypatient?.comments}</p>
             </div>
-            )}
+            
 
         </div>
 
       </PDFExport>
     </div>
-  )
+    )
 }
-
-export default PrintPdf;

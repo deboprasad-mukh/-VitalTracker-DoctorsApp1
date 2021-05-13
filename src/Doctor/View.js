@@ -70,7 +70,7 @@ export default function View(props) {
       suggestion:""
     })
     var param=new URLSearchParams();
-
+    localStorage.setItem("patientid" , patientid)
     const userEmail=localStorage.getItem("useremail")
     const userId=localStorage.getItem("userid")
     useEffect(()=>{
@@ -182,7 +182,7 @@ export default function View(props) {
                             </Typography>
                             </li>
                           </ul>
-                          <PictureAsPdfIcon className={classes.dailypdf} />
+                          <PictureAsPdfIcon className={classes.dailypdf} onClick={()=>history.push(`/eachdaypdf/${item?._id}`)}/>
                         </div>
                          
                        </div>
