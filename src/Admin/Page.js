@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import GroupAddRoundedIcon from '@material-ui/icons/GroupAddRounded';
 import { Box, Button, Container, Paper, Avatar, Grid, Typography } from '@material-ui/core';
@@ -63,11 +63,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Page() {
     const classes = useStyles();
     const history = useHistory();
+    const islogin = localStorage.getItem("admidlogin")
+    useEffect(()=>{
+        if(!islogin){
+            history.push("/")
+        }
+    },[islogin])
+    const logout=()=>{
+        localStorage.clear()
+        history.push('/login')
+    }
     return (
         <Container className={classes.root}>
 
             <Paper  component={Box} className={classes.ppr} width="60%"  mx="auto" p={4}>
-            <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>history.push('/')}/>
+            <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
             <Typography className={classes.logtxt}>Logout</Typography>
 
             <Typography  className={classes.add}>Add or Edit</Typography>

@@ -23,6 +23,12 @@ const AddPatient = () => {
         "bodyTemp":"",
         "rapidCoronaTest":""
     })
+    const islogin = localStorage.getItem("admidlogin")
+    useEffect(()=>{
+        if(!islogin){
+            history.push("/")
+        }
+    },[islogin])
     useEffect(()=>{
         axios.get("http://localhost:4000/doctorlist").then(res=>{
             setdoc(res.data)
@@ -89,11 +95,15 @@ const AddPatient = () => {
     })
 }
 console.log(patient)
+const logout=()=>{
+    localStorage.clear()
+    history.push('/')
+}
     return(
         <section className="heading">
 
             <ArrowBackIcon onClick={()=>history.push('/page')}/>
-            <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+            <PowerSettingsNewIcon className="logbtn" onClick={()=>logout()}/>
             <label className="logtxt">Logout</label>
 
             <h1 className="title">Add Patient</h1>
@@ -146,21 +156,6 @@ console.log(patient)
                         <input type="text" id="special" className="input-text" name="rapidCoronaTest" value={patient.rapidCoronaTest} onChange={handlePatientInput}/>
                         <label htmlFor="patientid" className="label">Rapid Corona Test :</label>
                     </div>
-                    
-                    {/* <div className="form-field col-lg-12">
-                    <div className="form-field col-lg-12">
-                        <input type="text" id="special" className="input-text"/>
-                        <label htmlFor="patientid" className="label">Patient Id :</label>
-                    </div>
-                    {/* <div className="form-field col-lg-12">
-                        <select className="choose-doc">
-                            <option class="input-choice">Select doctor</option>
-                            <option class="input-choice">Select doctor</option>
-                            <option class="input-choice">Select doctor</option>
-                        </select>
-                        <label htmlFor="patientid" className="label">Doctor Appointed :</label>
-                    </div> */}
-
                     <div className="form-field col-lg-12">
                         <input type="submit" class="submit-btn" value ="Add" onClick={handleSubmit}/>
                     </div>

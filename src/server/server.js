@@ -54,6 +54,13 @@ app.get('/doctorlist',(req,res)=>{
         })
     })
 });
+app.get("/eachDoctor/:id", (req,res)=>{
+    Doctor.findById(req.params.id).then(data=>{
+        res.send(data)
+    }).catch(err=>{
+        res.send(err)
+    })
+})
 app.get('/doctor/:email',(req,res)=>{
     Doctor.findOne({"email": req.params.email}).then(doctor=>{
         res.send(doctor)
@@ -143,6 +150,25 @@ app.put('/editpatient/:id',(req,res)=>{
          age :req.body.age,
          date :req.body.date,
          doctorid :req.body.doctorid,
+         reasonForappointment :req.body.reasonForappointment,
+         heartRate :req.body.heartRate,
+         oxygenLevel :req.body.oxygenLevel,
+         bloodPressure :req.body.bloodPressure,
+         bodyTemp :req.body.bodyTemp,
+         rapidCoronaTest :req.body.rapidCoronaTest
+    },{new : true}).then(patient=>{
+        res.send(patient)
+    }).catch((err)=>{
+        res.send({
+            message: "some error happened"
+        })
+    })
+});
+
+app.put('/editpatientbydoctor/:id',(req,res)=>{
+    Patient.findByIdAndUpdate(req.params.id, {
+        name :req.body.name,
+         age :req.body.age,
          reasonForappointment :req.body.reasonForappointment,
          heartRate :req.body.heartRate,
          oxygenLevel :req.body.oxygenLevel,

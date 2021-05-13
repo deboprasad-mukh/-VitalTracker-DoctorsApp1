@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  ppt:{
+    display: 'flex',
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "1.5rem"
+  },
   srch: {
     width:'100%',
     height:'1',
@@ -62,6 +68,14 @@ export default function DoctorHome(props) {
   const [searchpatient,setsearchpatient]=useState("")
   const profilename=localStorage.getItem("username");
   
+  const userEmail=localStorage.getItem("useremail")
+  const userId=localStorage.getItem("userid")
+  useEffect(()=>{
+    if(!userEmail){
+        history.push("/")
+       console.log("user exists")
+    }
+},[userEmail])
 
   useEffect(()=>{
     axios.get(`http://localhost:4000/selectedpatient/${props.profileid}`).then(res=>{
@@ -114,7 +128,7 @@ export default function DoctorHome(props) {
     <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
     <Typography className={classes.logtxt}>Logout</Typography>
     <Box className={classes.typ}>
-    <Typography variant="h5">Dr.&nbsp;{profilename}&nbsp; </Typography>
+    <Typography variant="h5">Dr. {profilename} </Typography>
     </Box>
     <TextField className={classes.datee} type="date" value={date} onChange={handledatechange}/>
     <TextField
@@ -133,7 +147,7 @@ export default function DoctorHome(props) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className={classes.ppr}>Pateint Name </TableCell>
+              <TableCell className={classes.ppt}>Patient Name </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

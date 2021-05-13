@@ -10,6 +10,7 @@ import Editdoctor from './Admin/AddDoctor/Editdoctor';
 import AddPatient from './Admin/AddPatient/AddPatient';
 import Editpatient from './Admin/AddPatient/Editpatient';
 import PrintPdf from './Doctor/PrintPdf';
+import Updatevitals from './Doctor/Updatevitals';
 
 export default function App() {
     const [currentdate,setcurrentdate]= useState("")
@@ -35,7 +36,7 @@ export default function App() {
                 <Route exact path="/page" component={()=><Page/>}/>
                 <Route exact path="/view/:id" component={(props)=><View currentdate={currentdate} patientid={props.match.params.id}/>}/> 
                 <Route exact path="/drview/:id" component={(props)=><DoctorHome profileid={props.match.params.id}/>}/>
-                
+                <Route exact path="/updatevitals/:patientid" component={(props)=><Updatevitals patientid={props.match.params.patientid}/>}/>
                 <Route exact path="/adddoctor" component={()=><AddDoctor/>}/> 
                 <Route exact path="/editdoctor" component={()=><Editdoctor/>}/>
                 <Route exact path="/addpatient" component={()=><AddPatient/>}/>

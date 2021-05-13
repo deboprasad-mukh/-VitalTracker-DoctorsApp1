@@ -10,21 +10,29 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 const Editdoctor = () => {
     const history =  useHistory();
     const [doc,setdoc]= useState([])
-    const[doctor,setDoctor] = useState({
-        "name":"",
-        "registrationId":"",
-        "email":"",
-        "specialist":"",
-    })
+    const[doctor,setDoctor] = useState({})
     const [doctorid,setDoctorid]=useState({
         doctorID: ''
         })
+    const islogin = localStorage.getItem("admidlogin")
+    useEffect(()=>{
+        if(!islogin){
+            history.push("/")
+        }
+    },[islogin])
         
-        useEffect(()=>{
-            axios.get("http://localhost:4000/doctorlist").then(res=>{
-            setdoc(res.data)
-            })
-            },[])
+        
+    useEffect(()=>{
+        axios.get("http://localhost:4000/doctorlist").then(res=>{
+        setdoc(res.data)
+        })
+    },[])
+
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/eachDoctor/${doctorid.doctorID}`).then(res=>{
+            setDoctor(res.data)
+        })
+    },[doctorid])
             
 
     let name,value
@@ -43,31 +51,36 @@ const Editdoctor = () => {
         setDoctorid({
         [name] : value
         })
-        }
+    }
         console.log(doctorid.doctorID)
         
 
     const param=new URLSearchParams();
-  const handleSubmit=()=>{
-   param.append("name", doctor.name); 
-   param.append("registrationId", doctor.registrationId);
-   param.append("email", doctor.email);
-   param.append("specialist", doctor.specialist);
+    const handleSubmit=()=>{
+    param.append("name", doctor.name); 
+    param.append("registrationId", doctor.registrationId);
+    param.append("email", doctor.email);
+    param.append("specialist", doctor.specialist);
     axios.put(`http://localhost:4000/editdoctor/${doctorid.doctorID}`, param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }
-    }).then(res=>{
-        window.alert("Successfully Added")
-        console.log("ok")
-        
-    })
-}
+        }).then(res=>{
+            window.alert("Successfully Added")
+            console.log("ok")
+
+        })
+    }
+    const logout=()=>{
+        localStorage.clear()
+        history.push('/')
+        console.log("clicked")
+    }
     return(
         
         <section className="heading">
         <ArrowBackIcon onClick={()=>history.push('/page')}/>
-        <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+        <PowerSettingsNewIcon className="logbtn" onClick={()=>logout()}/>
         <label className="logtxt">Logout</label>
             <h1 className="title">Edit Doctor</h1>
 
@@ -85,7 +98,7 @@ const Editdoctor = () => {
                         <label htmlFor="name" className="label">Name :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="reg" className="input-text" name="registrationId" value={doctor.regid} onChange={handleDocInput}/>
+                        <input type="text" id="reg" className="input-text" name="registrationId" value={doctor.registrationId} onChange={handleDocInput}/>
                         <label htmlFor="reg" className="label">Registration Id :</label>
                     </div>
                     <div className="form-field col-lg-12">
@@ -93,12 +106,12 @@ const Editdoctor = () => {
                         <label htmlFor="email" className="label">Email :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="special" className="input-text" name="specialist" value={doctor.specialization} onChange={handleDocInput}/>
+                        <input type="text" id="special" className="input-text" name="specialist" value={doctor.specialist} onChange={handleDocInput}/>
                         <label htmlFor="special" className="label">Specialization :</label>
                     </div>
 
                     <div className="form-field col-lg-12">
-                        <input type="button" className="submit-btn" value ="Add" onClick={handleSubmit}/>
+                        <input type="button" className="submit-btn" value ="Edit" onClick={handleSubmit}/>
                     </div>
                 </div>
             </div>

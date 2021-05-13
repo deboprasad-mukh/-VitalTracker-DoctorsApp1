@@ -50,7 +50,13 @@ const useStyles = makeStyles((theme) => ({
       pdf:{
         transform: "scale(2)",
         color: "blue"
-      }
+      },
+      dailypdf:{
+        color: "blue",
+        transform: "scale(2)",
+        
+      },
+      
 }))
 
 export default function View(props) {
@@ -64,6 +70,16 @@ export default function View(props) {
       suggestion:""
     })
     var param=new URLSearchParams();
+
+    const userEmail=localStorage.getItem("useremail")
+    const userId=localStorage.getItem("userid")
+    useEffect(()=>{
+      if(!userEmail){
+          history.push("/")
+         console.log("user exists")
+      }
+    },[userEmail])
+
     useEffect(()=>{
       axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
         setpatient(res.data)
@@ -130,6 +146,7 @@ export default function View(props) {
                          <Typography className={classes.txt} label="Temperature" margin="normal" fullWidth>Temperature : {patient.bodyTemp}°F</Typography>
                          <Typography className={classes.txt} label="RCT" margin="normal" fullWidth>RCT : {patient.rapidCoronaTest}</Typography>
                          <Typography className={classes.txt} label="Reason" margin="normal" fullWidth>Reason : {patient.reasonForappointment}</Typography>
+                         <Button variant="contained"  color="primary" onClick={()=>history.push(`/updatevitals/${patientid}`)}>edit</Button>
                          <TextField label="Medicines" margin="normal" fullWidth multiline name="medicine" value={update.medicine} onChange={updatechange}/>
                          <TextField label="Suggestion" margin="normal" fullWidth multiline name="suggestion" value={update.suggestion} onChange={updatechange}/>
                      </Box>
@@ -149,20 +166,26 @@ export default function View(props) {
                          <Typography className={classes.heading}>{item?.date}</Typography>
                        </AccordionSummary>
                        <AccordionDetails>
-                        <ul>
-                         <li>
-                         <Typography>
-                           Medicines :- {item?.medicines}
-                           </Typography>
-                         </li>
-                         
+                       <div>
+                        <div>
+                          <ul>
+                            <li>
+                            <Typography>
+                              Medicines :- {item?.medicines}
+                              </Typography>
+                            </li>
 
-                         <li>
-                         <Typography>
-                         Suggestion :- {item?.comments}
-                         </Typography>
-                         </li>
-                         </ul>
+
+                            <li>
+                            <Typography>
+                            Suggestion :- {item?.comments}
+                            </Typography>
+                            </li>
+                          </ul>
+                          <PictureAsPdfIcon className={classes.dailypdf} />
+                        </div>
+                         
+                       </div>
                        </AccordionDetails>
                       </Accordion>
                       

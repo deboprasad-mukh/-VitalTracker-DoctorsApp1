@@ -10,21 +10,16 @@ export default function Editpatient() {
     const history = useHistory();
     const [patientlist,setpatientlist]= useState([])
     const [doc,setdoc]= useState([])
-    const [patient, setPatient] = useState({
-        "name":"",
-        "age":"",
-        "date":new Date(),
-        "doctorid":"",
-        "reasonForappointment":"",
-        "heartRate":"",
-        "oxygenLevel":"",
-        "bloodPressure":"",
-        "bodyTemp":"",
-        "rapidCoronaTest":""
-    })
+    const [patient, setPatient] = useState({})
     const [patientid,setpatientid]=useState({
         patientID: ''
     })
+    const islogin = localStorage.getItem("admidlogin")
+    useEffect(()=>{
+        if(!islogin){
+            history.push("/")
+        }
+    },[islogin])
     useEffect(()=>{
         axios.get("http://localhost:4000/doctorlist").then(res=>{
             setdoc(res.data)
@@ -37,7 +32,13 @@ export default function Editpatient() {
     },[])
     console.log(doc)
     console.log(patientlist)
-    
+
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/patient/${patientid.patientID}`).then(res=>{
+          setPatient(res.data)
+        })
+      },[patientid])
+
     let name,value
     const handlePatientInput = (e) =>{
         name = e.target.name
@@ -99,11 +100,15 @@ export default function Editpatient() {
     })
 }
 console.log(patient)
+const logout=()=>{
+    localStorage.clear()
+    history.push('/')
+}
     return(
         <section className="heading">
 
             <ArrowBackIcon onClick={()=>history.push('/page')}/>
-            <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+            <PowerSettingsNewIcon className="logbtn" onClick={()=>logout()}/>
             <label className="logtxt">Logout</label>
 
             <h1 className="title">Edit Patient</h1>
@@ -168,7 +173,7 @@ console.log(patient)
                     
 
                     <div className="form-field col-lg-12">
-                        <input type="submit" class="submit-btn" value ="Add" onClick={handleSubmit}/>
+                        <input type="submit" class="submit-btn" value ="Edit" onClick={handleSubmit}/>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,12 @@ const[doctor,setDoctor] = useState({
 "specialist":"",
 })
 const [dbdoctor, setDbdoctor] = useState([])
+const islogin = localStorage.getItem("admidlogin")
+    useEffect(()=>{
+        if(!islogin){
+            history.push("/")
+        }
+    },[islogin])
 useEffect(()=>{
     axios.get("http://localhost:4000/doctorlist").then(res=>{
         setDbdoctor(res.data)
@@ -69,12 +75,16 @@ const handleSubmit=()=>{
     }
     })
 }
+const logout=()=>{
+    localStorage.clear()
+    history.push('/')
+}
 
 return(
 
         <section className="heading">
         <ArrowBackIcon onClick={()=>history.push('/page')}/>
-        <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+        <PowerSettingsNewIcon className="logbtn" onClick={()=>logout()}/>
         <label className="logtxt">Logout</label>
         <h1 className="title">Add Doctor</h1>
 

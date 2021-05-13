@@ -48,6 +48,7 @@ export default function Login(){
         if(user.password=="admin"){
             alert('Login successful')
             history.push('/page')
+            localStorage.setItem("admidlogin", true)
         }
         else{
             alert('Not matched user')
