@@ -114,7 +114,7 @@ export default function DoctorHome(props) {
     <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
     <Typography className={classes.logtxt}>Logout</Typography>
     <Box className={classes.typ}>
-    <Typography variant="h5">Dr. {profilename}</Typography>
+    <Typography variant="h5">Dr.&nbsp;{profilename}&nbsp; </Typography>
     </Box>
     <TextField className={classes.datee} type="date" value={date} onChange={handledatechange}/>
     <TextField
@@ -133,7 +133,7 @@ export default function DoctorHome(props) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className={classes.ppr}>Pateint Name</TableCell>
+              <TableCell className={classes.ppr}>Pateint Name </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
