@@ -116,7 +116,7 @@ export default function Header() {
                     onSuccess={responseGoogleonSuccess}
                     onFailure={responseGoogleonFailure}
                     cookiePolicy={'single_host_origin'}>
-                    Signin with Google
+                    Doctor Signin with Google
             </GoogleLogin>
           
           <Button 
