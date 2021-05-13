@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
       dailypdf:{
         color: "blue",
         transform: "scale(2)",
-        
+        marginLeft: "37px"
       },
       
 }))
