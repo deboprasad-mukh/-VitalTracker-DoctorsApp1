@@ -35,16 +35,17 @@ const useStyles = makeStyles((theme) => ({
           fontWeight: "bold"
       },
       logtxt: {
-        fontSize:11,
+        fontSize:13,
         float: 'right',
         marginLeft:'100%',
         marginBottom:'6%'
       },
       logbtn: {
-        color: 'red',
+        color: 'black',
         float: 'right',
         transform: "scale(2)",
-        marginBottom:'1%'
+        marginBottom:'1%',
+        marginRight:'0.8%'
       },
       pdf:{
         transform: "scale(2)",

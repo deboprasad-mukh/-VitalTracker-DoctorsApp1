@@ -82,8 +82,18 @@
     width: 10rem;
     font-family: 'Karla', sans-serif;
     font-weight: 800;
-    cursor: pointer;
-    
-    
+    cursor: pointer;   
 }
-
+.logbtn {
+    color: black;
+    float: right;
+    transform: scale(2);
+    margin-bottom:1%;
+    margin-right: 1%;
+  }
+.logtxt {
+    font-size:13px;
+    float: right;
+    margin-left:100%;
+    margin-bottom:6%;
+  }

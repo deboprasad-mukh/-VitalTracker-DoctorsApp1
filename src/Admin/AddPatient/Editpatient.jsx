@@ -1,7 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
+
 
 export default function Editpatient() {
+    const history = useHistory();
     const [patientlist,setpatientlist]= useState([])
     const [doc,setdoc]= useState([])
     const [patient, setPatient] = useState({
@@ -95,6 +101,11 @@ export default function Editpatient() {
 console.log(patient)
     return(
         <section className="heading">
+
+            <ArrowBackIcon onClick={()=>history.push('/page')}/>
+            <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+            <label className="logtxt">Logout</label>
+
             <h1 className="title">Edit Patient</h1>
 
             <div className="container">

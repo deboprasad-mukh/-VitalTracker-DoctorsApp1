@@ -1,8 +1,14 @@
 import React,{useState,useEffect} from 'react';
 import './AddDoc.css';
 import axios from 'axios';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useHistory } from 'react-router';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
+
 
 const Editdoctor = () => {
+    const history =  useHistory();
     const [doc,setdoc]= useState([])
     const[doctor,setDoctor] = useState({
         "name":"",
@@ -60,18 +66,20 @@ const Editdoctor = () => {
     return(
         
         <section className="heading">
+        <ArrowBackIcon onClick={()=>history.push('/page')}/>
+        <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+        <label className="logtxt">Logout</label>
             <h1 className="title">Edit Doctor</h1>
 
             <div className="container">
                 <div className="add-doc-form row">
                 <div className="form-field col-lg-6">
 
-<select className="choose-doc" name="doctorID" value={doctorid.doctorID} onChange={handleDocID}>
-<option class="input-choice">Select doctor</option>
-{doc.map(item=><option class="input-choice" value={item?._id}>{item?.name}</option>)}
-
-</select>
-</div>
+                <select className="choose-doc" name="doctorID" value={doctorid.doctorID} onChange={handleDocID}>
+                    <option class="input-choice">Select doctor</option>
+                    {doc.map(item=><option class="input-choice" value={item?._id}>{item?.name}</option>)}
+                </select>
+            </div>
                     <div className="form-field col-lg-12">
                         <input type="text" id="name" className="input-text" name="name" value={doctor.name} onChange={handleDocInput}/>
                         <label htmlFor="name" className="label">Name :</label>

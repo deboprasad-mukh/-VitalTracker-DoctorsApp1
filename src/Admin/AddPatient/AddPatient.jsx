@@ -1,8 +1,15 @@
 import React,{useEffect, useState} from 'react';
 import './AddPatient.css';
 import axios from 'axios';
+import { useHistory } from 'react-router';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
+
+
 const AddPatient = () => {
     
+    const history = useHistory();
     const [doc,setdoc]= useState([])
     const [patient, setPatient] = useState({
         "name":"",
@@ -84,6 +91,11 @@ const AddPatient = () => {
 console.log(patient)
     return(
         <section className="heading">
+
+            <ArrowBackIcon onClick={()=>history.push('/page')}/>
+            <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+            <label className="logtxt">Logout</label>
+
             <h1 className="title">Add Patient</h1>
 
             <div className="container">

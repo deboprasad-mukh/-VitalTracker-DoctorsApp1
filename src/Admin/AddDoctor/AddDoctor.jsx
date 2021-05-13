@@ -2,9 +2,13 @@ import React,{useState,useEffect} from 'react';
 import './AddDoc.css';
 import axios from 'axios';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useHistory } from 'react-router';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
 
 
 const AddDoctor = () => {
+    const history = useHistory();
 const[doctor,setDoctor] = useState({
 "name":"",
 "registrationId":"",
@@ -69,7 +73,9 @@ const handleSubmit=()=>{
 return(
 
         <section className="heading">
-        <ArrowBackIcon onClick={()=>history.push('/')}/>
+        <ArrowBackIcon onClick={()=>history.push('/page')}/>
+        <PowerSettingsNewIcon className="logbtn" onClick={()=>history.push('/')}/>
+        <label className="logtxt">Logout</label>
         <h1 className="title">Add Doctor</h1>
 
         <div className="container">

@@ -4,7 +4,7 @@ import GroupAddRoundedIcon from '@material-ui/icons/GroupAddRounded';
 import { Box, Button, Container, Paper, Avatar, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PeopleOutlineRoundedIcon from '@material-ui/icons/PeopleOutlineRounded';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,20 @@ const useStyles = makeStyles((theme) => ({
     link: {
         color: '#fff',
         textDecoration: 'none'
-    }
+    },
+    logbtn: {
+        color: 'black',
+        float: 'right',
+        transform: "scale(2)",
+        marginBottom:'1%',
+        marginRight:'1%'
+      },
+      logtxt: {
+        fontSize:13,
+        float: 'right',
+        marginLeft:'100%',
+        marginBottom:'6%'
+      },
 }))
 
 export default function Page() {
@@ -52,9 +65,11 @@ export default function Page() {
     const history = useHistory();
     return (
         <Container className={classes.root}>
-        
+
             <Paper  component={Box} className={classes.ppr} width="60%"  mx="auto" p={4}>
-            <ArrowBackIcon onClick={()=>history.push('/')}/>
+            <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>history.push('/')}/>
+            <Typography className={classes.logtxt}>Logout</Typography>
+
             <Typography  className={classes.add}>Add or Edit</Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={6}>

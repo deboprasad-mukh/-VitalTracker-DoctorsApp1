@@ -5,9 +5,6 @@ import axios from 'axios';
 import SearchIcon from '@material-ui/icons/Search';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory } from 'react-router';
-//import DateFnsUtils from '@date-io/date-fns'
-//import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
-//import useAutocomplete from '@material-ui/lab/useAutocomplete'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,13 +33,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%"
   },
   logbtn: {
-    color: 'red',
+    color: 'black',
     float: 'right',
     transform: "scale(2)",
-    marginBottom:'1%'
+    marginBottom:'1%',
+    marginRight: '0.8%'
   },
   logtxt: {
-    fontSize:11,
+    fontSize:13,
     float: 'right',
     marginLeft:'100%',
     marginBottom:'6%'
