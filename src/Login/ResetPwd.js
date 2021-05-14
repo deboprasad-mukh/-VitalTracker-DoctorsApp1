@@ -66,9 +66,10 @@ export default function ResetPwd(props) {
                         'content-Type': 'application/x-www-form-urlencoded'
                     }
                     }).then(res=>{
-                        window.alert("Successfully Added")
+                        localStorage.clear()
+                        alert("Reset Successfully")
                         console.log("ok")
-                        history.goBack()
+                        history.push("/")
                     })
                 }
                 else{

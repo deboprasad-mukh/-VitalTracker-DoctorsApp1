@@ -55,8 +55,9 @@ app.post('/newDoctor',(req,res)=>{
             bcc: "", // bcc is optional.
             subject:`Message from admin`,
             html: `
-            <h2>Congrats You are registered doctor</h2>
-            <p> Signin with your given google account </p>
+            <h2>Hi ${req.body.name} you are registered doctor</h2>
+            <p> Signin with your email </p>
+            <p>Password :- ${req.body.password} </p>
             <p> This is  an automatically generated email - please do not reply to it. If you have any queries please contact our helpdesk</p>
             <p> Please use this Link to login http://localhost:3000/ </p>`
         }
