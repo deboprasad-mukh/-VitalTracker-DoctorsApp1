@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography, Container, Paper, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import { Box, Button, Typography, Container, Paper, TextField, Accordion, AccordionSummary, AccordionDetails, Input } from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
       },
       editdaily:{
         marginLeft: "37px"
-      }
+      },
       
 }))
 
@@ -160,7 +160,7 @@ export default function View(props) {
                 </Box>
                 <Paper component={Box} width="100%" mx="auto" p={4} mt={2}>
                      <Box component="form">
-                         <Typography className={classes.txt} label="Heart Rate" margin="normal" fullWidth>Heart Rate : {patient.heartRate}</Typography>
+                         <Typography className={classes.txt} label="Heart Rate" margin="normal" fullWidth>Heart Rate : {patient.heartRate}Bpm</Typography>
                          <Typography className={classes.txt} label="SpO2 Level" margin="normal" fullWidth>SpO2 Level : {patient.oxygenLevel}</Typography>
                          <Typography className={classes.txt} label="Blood Pressure" margin="normal" fullWidth>Blood Pressure : {patient.bloodPressure}</Typography>
                          <Typography className={classes.txt} label="Temperature" margin="normal" fullWidth>Temperature : {patient.bodyTemp}°F</Typography>
@@ -168,17 +168,17 @@ export default function View(props) {
                          <Typography className={classes.txt} label="Reason" margin="normal" fullWidth>Reason : {patient.reasonForappointment}</Typography>
                          <Button variant="contained"  color="primary" onClick={()=>history.push(`/updatevitals/${patientid}`)}>edit</Button>
 
-                         <TextField label="heartRate" margin="normal" fullWidth multiline name="heartRate" value={update.heartRate} onChange={updatechange}/>
-                         <TextField label="oxygenLevel" margin="normal" fullWidth multiline name="oxygenLevel" value={update.oxygenLevel} onChange={updatechange}/>
-                         <TextField label="bloodPressure" margin="normal" fullWidth multiline name="bloodPressure" value={update.bloodPressure} onChange={updatechange}/>
-                         <TextField label="bodyTemp" margin="normal" fullWidth multiline name="bodyTemp" value={update.bodyTemp} onChange={updatechange}/>
-                         <TextField label="rapidCoronaTest" margin="normal" fullWidth multiline name="rapidCoronaTest" value={update.rapidCoronaTest} onChange={updatechange}/>
+                         <TextField type="number" id="standard-number" InputLabelProps={{shrink: true}} label="heartRate" margin="normal" fullWidth  name="heartRate" value={update.heartRate} onChange={updatechange}/>
+                         <TextField type="number" id="standard-number" InputLabelProps={{shrink: true}} label="oxygenLevel" margin="normal" fullWidth  name="oxygenLevel" value={update.oxygenLevel} onChange={updatechange}/>
+                         <TextField type="number" id="standard-number" InputLabelProps={{shrink: true}} label="bloodPressure" margin="normal" fullWidth  name="bloodPressure" value={update.bloodPressure} onChange={updatechange}/>
+                         <TextField type="number" id="standard-number" InputLabelProps={{shrink: true}} label="bodyTemp" margin="normal" fullWidth  name="bodyTemp" value={update.bodyTemp} onChange={updatechange}/>
+                         <TextField label="rapidCoronaTest" margin="normal" fullWidth  name="rapidCoronaTest" value={update.rapidCoronaTest} onChange={updatechange}/>
                          <TextField label="Medicines" margin="normal" fullWidth multiline name="medicine" value={update.medicine} onChange={updatechange}/>
                          <TextField label="Suggestion" margin="normal" fullWidth multiline name="suggestion" value={update.suggestion} onChange={updatechange}/>
                      </Box>
                 </Paper>
                 <Box mt={2} className={classes.btn}>
-                    <Button variant="contained"  color="primary" fullWidth onClick={()=>updateclick()}>Add</Button>
+                    <Button variant="contained"  color="primary" fullWidth onClick={()=>updateclick()}>Add daily vitals</Button>
                 </Box>
                 <Box mt={3}>
                     {daywisedetails.map(item=>
@@ -198,7 +198,7 @@ export default function View(props) {
                           <ul>
                           <li>
                             <Typography>
-                            heartRate :- {item?.heartRate}
+                            heartRate :- {item?.heartRate}Bpm
                               </Typography>
                             </li>
                             <li>
@@ -213,7 +213,7 @@ export default function View(props) {
                             </li>
                             <li>
                             <Typography>
-                            bodyTemp :- {item?.bodyTemp}
+                            bodyTemp :- {item?.bodyTemp}°F
                               </Typography>
                             </li>
                             <li>

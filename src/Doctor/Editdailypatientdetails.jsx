@@ -76,19 +76,19 @@ console.log(patient)
                 <div className="add-doc-form row">
                                     
                     <div className="form-field col-lg-12">
-                        <input type="text" id="reg" className="input-text" name="heartRate" value={patient.heartRate} onChange={handlePatientInput}/>
+                        <input type="number" id="reg" className="input-text" name="heartRate" value={patient.heartRate} onChange={handlePatientInput}/>
                         <label htmlFor="reg" className="label">Heart Rate :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="reg" className="input-text" name="oxygenLevel" value={patient.oxygenLevel} onChange={handlePatientInput}/>
+                        <input type="number" id="reg" className="input-text" name="oxygenLevel" value={patient.oxygenLevel} onChange={handlePatientInput}/>
                         <label htmlFor="reg" className="label">Oxygen Level :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="reg" className="input-text" name="bloodPressure" value={patient.bloodPressure} onChange={handlePatientInput}/>
+                        <input type="number" id="reg" className="input-text" name="bloodPressure" value={patient.bloodPressure} onChange={handlePatientInput}/>
                         <label htmlFor="reg" className="label">Blood Pressure :</label>
                     </div>
                     <div className="form-field col-lg-12">
-                        <input type="text" id="special" className="input-text" name="bodyTemp" value={patient.bodyTemp} onChange={handlePatientInput}/>
+                        <input type="number" id="special" className="input-text" name="bodyTemp" value={patient.bodyTemp} onChange={handlePatientInput}/>
                         <label htmlFor="patientid" className="label">Body Temperature :</label>
                     </div>
                     <div className="form-field col-lg-12">

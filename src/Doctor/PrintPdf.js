@@ -89,10 +89,10 @@ const PrintPdf = (props) => {
               <h5>Date: {item?.date}</h5><br/>
             <p>Medicines : {item?.medicines}</p>
             <p>Suggestions : {item?.comments}</p>
-            <p>heartRate : {item?.heartRate}</p>
+            <p>heartRate : {item?.heartRate}Bpm</p>
             <p>oxygenLevel : {item?.oxygenLevel}</p>
             <p>bloodPressure : {item?.bloodPressure}</p>
-            <p>bodyTemp : {item?.bodyTemp}</p>
+            <p>bodyTemp : {item?.bodyTemp}°F</p>
             <p>rapidCoronaTest : {item?.rapidCoronaTest}</p>
             
             </div>

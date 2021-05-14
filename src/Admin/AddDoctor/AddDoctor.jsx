@@ -4,7 +4,7 @@ import axios from 'axios';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-
+import validator from 'validator'
 
 
 const AddDoctor = () => {
@@ -49,8 +49,8 @@ const handleSubmit=()=>{
         alert("Please fill all the fields")
         return
     }
-     if(!doctor.email.includes('@')){
-        alert("email must include @")
+    if(!validator.isEmail(doctor.email)){
+        alert("email must be a valid mail")
         return
     }
 
@@ -81,6 +81,7 @@ const handleSubmit=()=>{
     })
     }
 })
+history.push("/page")
 }
 const logout=()=>{
     localStorage.clear()

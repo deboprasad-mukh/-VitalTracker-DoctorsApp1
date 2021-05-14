@@ -60,16 +60,18 @@ const Editdoctor = () => {
     param.append("name", doctor.name); 
     param.append("registrationId", doctor.registrationId);
     param.append("email", doctor.email);
+    param.append("password", doctor.password);
     param.append("specialist", doctor.specialist);
     axios.put(`http://localhost:4000/editdoctor/${doctorid.doctorID}`, param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }
         }).then(res=>{
-            window.alert("Successfully Added")
+            alert("Successfully Added")
             console.log("ok")
 
         })
+        history.push("/page")
     }
     const logout=()=>{
         localStorage.clear()
@@ -104,6 +106,12 @@ const Editdoctor = () => {
                     <div className="form-field col-lg-12">
                         <input type="email" id="email" className="input-text" name="email" value={doctor.email} onChange={handleDocInput}/>
                         <label htmlFor="email" className="label">Email :</label>
+                    </div>
+
+
+                    <div className="form-field col-lg-12">
+                        <input type="password" id="password" className="input-text" name="password" value={doctor.password} onChange={handleDocInput}/>
+                        <label htmlFor="password" className="label">Password :</label>
                     </div>
                     <div className="form-field col-lg-12">
                         <input type="text" id="special" className="input-text" name="specialist" value={doctor.specialist} onChange={handleDocInput}/>

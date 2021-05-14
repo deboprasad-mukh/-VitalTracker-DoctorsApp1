@@ -98,6 +98,7 @@ export default function Editpatient() {
             "rapidCoronaTest":""
         })
     })
+    history.push('/page')
 }
 console.log(patient)
 const logout=()=>{

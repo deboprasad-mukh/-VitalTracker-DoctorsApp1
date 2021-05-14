@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid,Paper, Avatar, TextField, Button } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,14 +23,24 @@ pswd: {
 
 
 export default function DrForgotPwd() {
+    const param=new URLSearchParams();
 
     const classes = useStyles();
 
     const history = useHistory();
 
+    const [doctor,setdoctor]= useState({})
+
     const [user, setUser] = useState({
         "email":'',
     })
+
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/doctor/${user.email}`).then(res=>{
+            setdoctor(res.data)
+            console.log("doctor password" , res.data)
+        })
+    },[user])
 
     let name,value;
     const handleChange =(e)=> {
@@ -42,17 +53,24 @@ export default function DrForgotPwd() {
     }
 
     const handleClick = () => {
-        //alert('submit')
-        //history.push('/page')
-        // if(user.password=="admin"){
-            // alert('Login successful')
-            // history.push('/page')
-          // localStorage.setItem("admidlogin", true)
-        // }
-        // else{
-            // alert('Not matched user')
-            // 
-        // }
+        param.append("email" , user.email)
+        param.append("password" , doctor.password)
+        param.append("name" , doctor.name)
+        axios.post("http://localhost:4000/mail", param,{
+            headers:{
+
+                'content-Type': 'application/x-www-form-urlencoded'
+            }
+            }).then(res=>{
+                window.alert("Message Sent")
+                setUser({
+                    email:''
+                })
+            }).catch(() => {
+              console.log('message not send')
+              alert('message not sent')
+            })
+            history.push("/")
     }
 
 

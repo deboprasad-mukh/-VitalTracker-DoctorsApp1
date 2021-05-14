@@ -119,6 +119,52 @@ app.put('/editdoctor/:id',(req,res)=>{
         })
     })
 });
+app.put('/editdoctorpassword/:id',(req,res)=>{
+    Doctor.findByIdAndUpdate(req.params.id, {
+        
+        password: req.body.password
+         
+    },{new : true}).then(doctor=>{
+        res.send(doctor)
+    }).catch((err)=>{
+        res.send({
+            message: "some error happened"
+        })
+    })
+});
+
+app.post('/mail', (req, res) =>{
+    console.log(req.body.password)
+    var smtpTransport = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        secureConnection: false,
+        port: 587,
+        auth: {
+            user: "indusnet.projectgroup1@gmail.com",// your actual email
+            pass: "projectgroup1"        // your actual password
+        }
+    });
+    var mailOptions = {
+        from: "",
+        to: req.body.email,
+        bcc: "", // bcc is optional.
+        subject:`Message from admin`,
+        html: `
+        <h2>Hi ${req.body.name},</h2>
+        We've received a request to reset the password for your Doctor Portal account. No changes have been made to your account yet.<br/> You can reset your password by manupulating the given password below.<br/><center><h5>${req.body.password}</h5></center> <br/>If you do not request the new password, please let us know immediately.<br/>--@support.com`
+    }
+    //console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+        if (error) {
+            console.log(error);
+            res.send("error");
+        } else {
+            //console.log("Message sent: " + response.message);
+            res.send("sent");
+        }
+    });
+
+})
 
 
 const PatientSchema = new mongoose.Schema({

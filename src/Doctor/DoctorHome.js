@@ -128,7 +128,8 @@ export default function DoctorHome(props) {
   return (
     <Container className={classes.root}>
     <Paper component={Box} width="90%"  mx="auto" p={5}>
-    <Button className={classes.reset} onClick={history.push('/reset')}>Reset Password</Button>
+    <Button className={classes.reset} onClick={()=>history.push(`/reset/${props.profileid}`)}>Reset Password</Button>
+    
     <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
     <Typography className={classes.logtxt}>Logout</Typography>
     

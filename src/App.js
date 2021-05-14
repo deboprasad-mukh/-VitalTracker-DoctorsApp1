@@ -40,10 +40,10 @@ export default function App() {
                 <Route exact path="/login" component={()=><Login/>}/>
                 <Route exact path="/drLogin" component={()=><DrLogin />} />
                 <Route exact path="/fpwd" component={()=><DrForgotPwd />} /> 
-                <Route exact path="/reset" component={()=><ResetPwd />} />
+                <Route exact path="/reset/:id" component={(props)=><ResetPwd drID={props.match.params.id}/>} />
                 <Route exact path="/page" component={()=><Page/>}/>
                 <Route exact path="/view/:id" component={(props)=><View currentdate={currentdate} patientid={props.match.params.id}/>}/> 
-                <Route exact path="/drview" component={()=><DoctorHome />} />
+                
                 <Route exact path="/drview/:id" component={(props)=><DoctorHome profileid={props.match.params.id}/>}/>
                 <Route exact path="/updatevitals/:patientid" component={(props)=><Updatevitals patientid={props.match.params.patientid}/>}/>
                 <Route exact path="/adddoctor" component={()=><AddDoctor/>}/> 

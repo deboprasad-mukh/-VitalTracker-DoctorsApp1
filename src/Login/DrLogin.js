@@ -4,6 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +55,26 @@ export default function DrLogin(){
             // alert('Not matched user')
             // 
         // }
+        axios.get(`http://localhost:4000/doctor/${user.email}`).then(res=>{
+            if(res.data){
+            //   localStorage.setItem("useremail",user.email)
+            //   localStorage.setItem("username",res.data.name)
+            //   localStorage.setItem("userid",res.data._id)
+            //   history.push(`/drview/${res.data._id}`)
+                if(user.password==res.data.password){
+                    localStorage.setItem("useremail",user.email)
+                    localStorage.setItem("username",res.data.name)
+                    localStorage.setItem("userid",res.data._id)
+                    history.push(`/drview/${res.data._id}`)
+                }
+                else{
+                    alert("Password not match")
+                }
+            }
+            else{
+              alert("not register doctor")
+            }
+        })
     }
 
 
@@ -70,7 +91,7 @@ export default function DrLogin(){
                 </Grid>
                 <TextField label='Email' className={classes.emailId} placeholder='Enter Email id' value={user.email} name="email" onChange={handleChange} type="email" fullWidth required/>
                 <TextField label='Password' className={classes.pswd} placeholder='Enter password' value={user.password} name="password" onChange={handleChange} type='password' fullWidth required/>
-                <Button type='button' onClick={handleClick} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                <Button type='button' onClick={()=>handleClick()} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
                 <Typography>
                     <Link to="/fpwd">
                         Forgot Password ?
