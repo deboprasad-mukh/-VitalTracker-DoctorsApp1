@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Grid,Paper, Avatar, TextField, Button } from '@material-ui/core'
+import { Grid,Paper, Avatar, TextField, Button, Typography } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
+import { useHistory, Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
@@ -71,6 +71,11 @@ export default function DrLogin(){
                 <TextField label='Email' className={classes.emailId} placeholder='Enter Email id' value={user.email} name="email" onChange={handleChange} type="email" fullWidth required/>
                 <TextField label='Password' className={classes.pswd} placeholder='Enter password' value={user.password} name="password" onChange={handleChange} type='password' fullWidth required/>
                 <Button type='button' onClick={handleClick} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                <Typography>
+                    <Link to="/fpwd">
+                        Forgot Password ?
+                    </Link>
+                </Typography>
             </Paper>
         </Grid>
     )

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Collapse, Box, Button } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Collapse, Box, Button, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Search, Account } from '@trejgun/material-ui-icons-google'
 import { Link as Scroll } from 'react-scroll';
-import { useHistory } from 'react-router';
+import { useHistory, Link } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 
@@ -52,6 +52,12 @@ const useStyles = makeStyles((theme) => ({
   icon1: {
     marginRight: theme.spacing(1)
   },
+  txts: {
+    color: "#fff"
+  },
+  link: {
+    color: '#000'
+  }
 }));
 export default function Header() {
   const history = useHistory();
@@ -126,6 +132,10 @@ export default function Header() {
           <Account className={classes.icon1} /> Administrator Login
           </Button>
           </Box>
+          <Typography className={classes.txts}>Hi Doctor! don't have gmail account ? 
+          {/* <Link to='/drLogin' className={classes.link}>Login</Link> Here */}
+             <Button  onClick={()=> history.push('/drLogin')}>Login Here</Button> 
+          </Typography>
         </div>
       </Collapse>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Paper, Box, Typography, TableContainer, Table, TableBody, TableHead, TableRow, TableCell, TablePagination, InputBase, TextField, InputAdornment } from '@material-ui/core';
+import { Container, Paper, Box, Typography, TableContainer, Table, TableBody, TableHead, TableRow, TableCell, TablePagination, Button, TextField, InputAdornment } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import SearchIcon from '@material-ui/icons/Search';
@@ -125,8 +125,10 @@ export default function DoctorHome(props) {
   return (
     <Container className={classes.root}>
     <Paper component={Box} width="90%"  mx="auto" p={5}>
+    <Button>Reset Password</Button>
     <PowerSettingsNewIcon className={classes.logbtn} onClick={()=>logout()}/>
     <Typography className={classes.logtxt}>Logout</Typography>
+    
     <Box className={classes.typ}>
     <Typography variant="h5">Dr. {profilename} </Typography>
     </Box>
