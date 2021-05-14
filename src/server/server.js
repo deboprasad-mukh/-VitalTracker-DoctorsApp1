@@ -64,10 +64,10 @@ app.post('/newDoctor',(req,res)=>{
         smtpTransport.sendMail(mailOptions, function (error, response) {
             if (error) {
                 console.log(error);
-                res.end("error");
+                res.send("error");
             } else {
                 //console.log("Message sent: " + response.message);
-                res.end("sent");
+                res.send("sent");
             }
         });
         res.send(data)
@@ -108,6 +108,7 @@ app.put('/editdoctor/:id',(req,res)=>{
         name :req.body.name,
         registrationId :req.body.registrationId,
         email :req.body.email,
+        password: req.body.password,
         specialist :req.body.specialist,
          
     },{new : true}).then(doctor=>{
