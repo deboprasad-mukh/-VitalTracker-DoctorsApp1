@@ -81,6 +81,11 @@ export default function Eachdaypdf(props) {
               <h5>Date: {eachdaypatient?.date}</h5><br/>
             <p>Medicines : {eachdaypatient?.medicines}</p>
             <p>Suggestions : {eachdaypatient?.comments}</p>
+            <p>heartRate : {eachdaypatient?.heartRate}</p>
+            <p>oxygenLevel : {eachdaypatient?.oxygenLevel}</p>
+            <p>bloodPressure : {eachdaypatient?.bloodPressure}</p>
+            <p>bodyTemp : {eachdaypatient?.bodyTemp}</p>
+            <p>rapidCoronaTest : {eachdaypatient?.rapidCoronaTest}</p>
             </div>
             
 

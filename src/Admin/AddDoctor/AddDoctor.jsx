@@ -42,7 +42,7 @@ console.log(doctor)
 }
 console.log(doctor.email)
 console.log(dbdoctor.email)
-const param=new URLSearchParams();
+let param=new URLSearchParams();
 const handleSubmit=()=>{
     if((!doctor.name) || (!doctor.registrationId) || (!doctor.email) || (!doctor.specialist)){
         alert("Please fill all the fields")
@@ -68,12 +68,16 @@ const handleSubmit=()=>{
         'content-Type': 'application/x-www-form-urlencoded'
         }
         }).then(res=>{
-        window.alert("Successfully Added")
-        console.log("ok")
-
+        console.log("added")
+        setDoctor({
+            name:"",
+            registrationId:"",
+            email:"",
+            specialist:"",
         })
-    }
     })
+    }
+})
 }
 const logout=()=>{
     localStorage.clear()
@@ -95,7 +99,7 @@ return(
         <label htmlFor="name" className="label">Name :</label>
         </div>
         <div className="form-field col-lg-12">
-        <input type="text" id="reg" className="input-text" name="registrationId" value={doctor.regid} onChange={handleDocInput}/>
+        <input type="text" id="reg" className="input-text" name="registrationId" value={doctor.registrationId} onChange={handleDocInput}/>
         <label htmlFor="reg" className="label">Registration Id :</label>
         </div>
         <div className="form-field col-lg-12">
@@ -103,7 +107,7 @@ return(
         <label htmlFor="email" className="label">Email :</label>
         </div>
         <div className="form-field col-lg-12">
-        <input type="text" id="special" className="input-text" name="specialist" value={doctor.specialization} onChange={handleDocInput}/>
+        <input type="text" id="special" className="input-text" name="specialist" value={doctor.specialist} onChange={handleDocInput}/>
         <label htmlFor="special" className="label">Specialization :</label>
         </div>
 

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cors=require("cors");
 const bodyparser=require("body-parser");
+const nodemailer = require('nodemailer');
 
 
 app.use(bodyparser.urlencoded({
@@ -37,6 +38,36 @@ app.post('/newDoctor',(req,res)=>{
         specialist:req.body.specialist,
     })
     doctor.save().then(data=>{
+        var smtpTransport = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            secureConnection: false,
+            port: 587,
+            auth: {
+                user: "indusnet.projectgroup1@gmail.com",// your actual email
+                pass: "projectgroup1"        // your actual password
+            }
+        });
+        var mailOptions = {
+            from: "",
+            to: req.body.email,
+            bcc: "", // bcc is optional.
+            subject:`Message from admin`,
+            html: `
+            <h2>Congrats You are registered doctor</h2>
+            <p> Signin with your given google account </p>
+            <p> This is  an automatically generated email - please do not reply to it. If you have any queries please contact our helpdesk</p>
+            <p> Please use this Link to login http://localhost:3000/ </p>`
+        }
+        //console.log(mailOptions);
+        smtpTransport.sendMail(mailOptions, function (error, response) {
+            if (error) {
+                console.log(error);
+                res.end("error");
+            } else {
+                //console.log("Message sent: " + response.message);
+                res.end("sent");
+            }
+        });
         res.send(data)
     }).catch((err)=>{
         res.send({
@@ -194,6 +225,11 @@ const dailyUpdatedPatientSchema = new mongoose.Schema({
     "comments":"",
     "medicines":"",
     "date":"",
+    "heartRate":"",
+    "oxygenLevel":"",
+    "bloodPressure":"",
+    "bodyTemp":"",
+    "rapidCoronaTest":""
     
 })
 
@@ -205,7 +241,13 @@ app.post('/adddailyPatient',(req,res)=>{
         patientid:req.body.patientid,
         comments:req.body.comments,
         medicines:req.body.medicines,
-        date: req.body.date
+        date: req.body.date,
+        heartRate :req.body.heartRate,
+        oxygenLevel :req.body.oxygenLevel,
+        bloodPressure :req.body.bloodPressure,
+        bodyTemp :req.body.bodyTemp,
+        rapidCoronaTest :req.body.rapidCoronaTest 
+
     })
     dailypatient.save().then(data=>{
         res.send(data)

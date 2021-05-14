@@ -66,6 +66,11 @@ export default function View(props) {
     const [patient,setpatient] = useState({})
     const [daywisedetails,setdaywisedetails] =useState([])
     const [update,setupdate]= useState({
+      heartRate:"",
+      oxygenLevel:"",
+      bloodPressure:"",
+      bodyTemp:"",
+      rapidCoronaTest:"",
       medicine:"",
       suggestion:""
     })
@@ -109,6 +114,13 @@ export default function View(props) {
       param.append("comments", update.suggestion);
       param.append("medicines", update.medicine); 
       param.append("date", currentdate);
+
+      param.append("heartRate", update.heartRate);
+      param.append("oxygenLevel", update.oxygenLevel);
+      param.append("bloodPressure", update.bloodPressure); 
+      param.append("bodyTemp", update.bodyTemp);
+      param.append("rapidCoronaTest", update.rapidCoronaTest);
+      
       
       axios.post("http://localhost:4000/adddailyPatient", param,{
         headers:{
@@ -122,7 +134,12 @@ export default function View(props) {
         })
         setupdate({
           medicine:"",
-          suggestion:""
+          suggestion:"",
+          heartRate:"",
+          oxygenLevel:"",
+          bloodPressure:"",
+          bodyTemp:"",
+          rapidCoronaTest:"",
         })
         param=new URLSearchParams();
     }
@@ -147,6 +164,12 @@ export default function View(props) {
                          <Typography className={classes.txt} label="RCT" margin="normal" fullWidth>RCT : {patient.rapidCoronaTest}</Typography>
                          <Typography className={classes.txt} label="Reason" margin="normal" fullWidth>Reason : {patient.reasonForappointment}</Typography>
                          <Button variant="contained"  color="primary" onClick={()=>history.push(`/updatevitals/${patientid}`)}>edit</Button>
+
+                         <TextField label="heartRate" margin="normal" fullWidth multiline name="heartRate" value={update.heartRate} onChange={updatechange}/>
+                         <TextField label="oxygenLevel" margin="normal" fullWidth multiline name="oxygenLevel" value={update.oxygenLevel} onChange={updatechange}/>
+                         <TextField label="bloodPressure" margin="normal" fullWidth multiline name="bloodPressure" value={update.bloodPressure} onChange={updatechange}/>
+                         <TextField label="bodyTemp" margin="normal" fullWidth multiline name="bodyTemp" value={update.bodyTemp} onChange={updatechange}/>
+                         <TextField label="rapidCoronaTest" margin="normal" fullWidth multiline name="rapidCoronaTest" value={update.rapidCoronaTest} onChange={updatechange}/>
                          <TextField label="Medicines" margin="normal" fullWidth multiline name="medicine" value={update.medicine} onChange={updatechange}/>
                          <TextField label="Suggestion" margin="normal" fullWidth multiline name="suggestion" value={update.suggestion} onChange={updatechange}/>
                      </Box>
@@ -166,9 +189,35 @@ export default function View(props) {
                          <Typography className={classes.heading}>{item?.date}</Typography>
                        </AccordionSummary>
                        <AccordionDetails>
+                       
                        <div>
                         <div>
                           <ul>
+                          <li>
+                            <Typography>
+                            heartRate :- {item?.heartRate}
+                              </Typography>
+                            </li>
+                            <li>
+                            <Typography>
+                            oxygenLevel :- {item?.oxygenLevel}
+                              </Typography>
+                            </li>
+                            <li>
+                            <Typography>
+                            bloodPressure :- {item?.bloodPressure}
+                              </Typography>
+                            </li>
+                            <li>
+                            <Typography>
+                            bodyTemp :- {item?.bodyTemp}
+                              </Typography>
+                            </li>
+                            <li>
+                            <Typography>
+                            rapidCoronaTest :- {item?.rapidCoronaTest}
+                              </Typography>
+                            </li>
                             <li>
                             <Typography>
                               Medicines :- {item?.medicines}
