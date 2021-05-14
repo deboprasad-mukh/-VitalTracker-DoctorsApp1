@@ -13,6 +13,8 @@ import PrintPdf from './Doctor/PrintPdf';
 import Updatevitals from './Doctor/Updatevitals';
 import Eachdaypdf from './Doctor/Eachdaypdf';
 import Editdailypatientdetails from './Doctor/Editdailypatientdetails';
+import DrLogin from './Login/DrLogin';
+import DrForgotPwd from './Login/DrForgotPwd';
 
 export default function App() {
     const [currentdate,setcurrentdate]= useState("")
@@ -35,6 +37,8 @@ export default function App() {
                 <Switch>
                 <Route exact path="/" component={()=><Front/>}/>
                 <Route exact path="/login" component={()=><Login/>}/>
+                <Route exact path="/drLogin" component={()=><DrLogin />} />
+                <Route exact path="/fpwd" component={()=><DrForgotPwd />} /> 
                 <Route exact path="/page" component={()=><Page/>}/>
                 <Route exact path="/view/:id" component={(props)=><View currentdate={currentdate} patientid={props.match.params.id}/>}/> 
                 <Route exact path="/drview/:id" component={(props)=><DoctorHome profileid={props.match.params.id}/>}/>

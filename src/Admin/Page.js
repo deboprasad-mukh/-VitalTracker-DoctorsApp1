@@ -71,7 +71,7 @@ export default function Page() {
     },[islogin])
     const logout=()=>{
         localStorage.clear()
-        history.push('/login')
+        history.push('/')
     }
     return (
         <Container className={classes.root}>

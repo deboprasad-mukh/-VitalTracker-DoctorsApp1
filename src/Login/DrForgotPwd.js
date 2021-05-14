@@ -64,12 +64,12 @@ export default function DrForgotPwd() {
         <div>
         <Grid>
             <Paper elevation={10} style={paperStyle}>
-            <ArrowBackIcon onClick={()=>history.push('/')}/>
+            <ArrowBackIcon onClick={()=>history.push('/drLogin')}/>
                 <Grid align='center' className={classes.root}>
                      <Avatar style={avatarStyle}><LockIcon/></Avatar>
-                    <h5>Forgot Your Passwred?</h5>
-                    <small>No worries! Enter your email and we will send you a link.</small>
-                </Grid>
+                    <h5>Forgot Your Password ?</h5>
+                    <small>No worries! Enter your email and we will send you a link on your registered email.</small><br /><br/>
+                </Grid><br/>
                 <TextField label='Email' className={classes.emailId} placeholder='Enter Email id' value={user.email} name="email" onChange={handleChange} type="email" fullWidth required/>            
                 <Button type='button' onClick={handleClick} color='primary' variant="contained" style={btnstyle} fullWidth>Send Request</Button>
             </Paper>
