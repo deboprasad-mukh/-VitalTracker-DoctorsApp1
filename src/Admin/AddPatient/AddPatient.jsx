@@ -126,7 +126,7 @@ const logout=()=>{
                     
                     <select className="choose-doc" name="doctorid" value={patient.doctorid} onChange={handlePatientInput}>
                             <option class="input-choice">Select doctor</option>
-                            {doc.map(item=><option class="input-choice" value={item?._id}>{item?.name}</option>)}
+                            {doc.map(item=><option class="input-choice" value={item?._id}>Dr. {item?.name}</option>)}
                             
                         </select>
                         <label htmlFor="patientid" className="label-doctor">Doctor Appointed :</label>

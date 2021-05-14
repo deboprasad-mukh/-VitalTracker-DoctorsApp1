@@ -24,6 +24,7 @@ const doctorSchema = new mongoose.Schema({
     "name":"",
     "registrationId":"",
     "email":"",
+    "password":"",
     "specialist":"",
     
 })
@@ -35,6 +36,7 @@ app.post('/newDoctor',(req,res)=>{
         name: req.body.name,
         registrationId: req.body.registrationId,
         email:req.body.email,
+        password: req.body.password,
         specialist:req.body.specialist,
     })
     doctor.save().then(data=>{
@@ -266,6 +268,25 @@ app.get("/eachdaypatient/:id", (req,res)=>{
 })
 app.get('/dailypatientdetails/:patientid',(req,res)=>{
     DailyPatient.find({patientid : req.params.patientid}).then(dailypatient=>{
+        res.send(dailypatient)
+    }).catch((err)=>{
+        res.send({
+            message: "some error happened"
+        })
+    })
+});
+app.put('/editdailypatientdetails/:id',(req,res)=>{
+    DailyPatient.findByIdAndUpdate(req.params.id, {
+        patientid:req.body.patientid,
+        comments:req.body.comments,
+        medicines:req.body.medicines,
+        date: req.body.date,
+        heartRate :req.body.heartRate,
+        oxygenLevel :req.body.oxygenLevel,
+        bloodPressure :req.body.bloodPressure,
+        bodyTemp :req.body.bodyTemp,
+        rapidCoronaTest :req.body.rapidCoronaTest
+    },{new : true}).then(dailypatient=>{
         res.send(dailypatient)
     }).catch((err)=>{
         res.send({

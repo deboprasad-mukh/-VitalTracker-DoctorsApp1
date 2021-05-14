@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
         transform: "scale(2)",
         marginLeft: "37px"
       },
+      editdaily:{
+        marginLeft: "37px"
+      }
       
 }))
 
@@ -232,6 +235,7 @@ export default function View(props) {
                             </li>
                           </ul>
                           <PictureAsPdfIcon className={classes.dailypdf} onClick={()=>history.push(`/eachdaypdf/${item?._id}`)}/>
+                          <Button variant="contained"  color="primary" className={classes.editdaily} onClick={()=>history.push(`/eachdayeditdetails/${item?._id}`)}>Edit daily details</Button>
                         </div>
                          
                        </div>

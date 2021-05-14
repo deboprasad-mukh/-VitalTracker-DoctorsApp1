@@ -12,6 +12,7 @@ import Editpatient from './Admin/AddPatient/Editpatient';
 import PrintPdf from './Doctor/PrintPdf';
 import Updatevitals from './Doctor/Updatevitals';
 import Eachdaypdf from './Doctor/Eachdaypdf';
+import Editdailypatientdetails from './Doctor/Editdailypatientdetails';
 
 export default function App() {
     const [currentdate,setcurrentdate]= useState("")
@@ -44,6 +45,7 @@ export default function App() {
                 <Route exact path="/editpatient" component={()=><Editpatient/>}/>
                 <Route exact path="/printpdf/:id" component={(props)=><PrintPdf patientid={props.match.params.id}/>}/>
                 <Route exact path="/eachdaypdf/:id" component={(props)=><Eachdaypdf eachdaypatientid={props.match.params.id}/>}/>
+                <Route exact path="/eachdayeditdetails/:id" component={(props)=><Editdailypatientdetails eachdaypatientid={props.match.params.id}/>}/>
                 </Switch>
             </BrowserRouter> 
         </div>
