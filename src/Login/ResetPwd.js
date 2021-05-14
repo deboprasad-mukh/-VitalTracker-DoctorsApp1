@@ -64,7 +64,7 @@ export default function ResetPwd() {
         <div>
             <Grid>
                 <Paper elevation={10} style={paperStyle}>
-                <ArrowBackIcon onClick={()=>history.push('/')}/>
+                <ArrowBackIcon onClick={()=>history.push('/drview')}/>
                     <Grid align='center' className={classes.root}>
                          <Avatar style={avatarStyle}><VpnKeyOutlinedIcon/></Avatar>
                         <h5>Reset Your Password?</h5>
