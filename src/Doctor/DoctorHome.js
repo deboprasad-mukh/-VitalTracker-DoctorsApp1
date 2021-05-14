@@ -130,7 +130,7 @@ export default function DoctorHome(props) {
     <Typography className={classes.logtxt}>Logout</Typography>
     
     <Box className={classes.typ}>
-    <Typography variant="h5">Dr. {profilename} </Typography>
+    <Typography variant="h5">Dr.&nbsp{profilename} </Typography>
     </Box>
     <TextField className={classes.datee} type="date" value={date} onChange={handledatechange}/>
     <TextField
