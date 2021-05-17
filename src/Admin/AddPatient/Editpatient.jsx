@@ -21,12 +21,12 @@ export default function Editpatient() {
         }
     },[islogin])
     useEffect(()=>{
-        axios.get("http://localhost:4000/doctorlist").then(res=>{
+        axios.get("https://quiet-springs-42138.herokuapp.com/doctorlist").then(res=>{
             setdoc(res.data)
         })
     },[])
     useEffect(()=>{
-        axios.get("http://localhost:4000/patientlist").then(res=>{
+        axios.get("https://quiet-springs-42138.herokuapp.com/patientlist").then(res=>{
             setpatientlist(res.data)
         })
     },[])
@@ -34,7 +34,7 @@ export default function Editpatient() {
     console.log(patientlist)
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/patient/${patientid.patientID}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/patient/${patientid.patientID}`).then(res=>{
           setPatient(res.data)
         })
       },[patientid])
@@ -78,7 +78,7 @@ export default function Editpatient() {
    param.append("bloodPressure", patient.bloodPressure);
    param.append("bodyTemp", patient.bodyTemp);
    param.append("rapidCoronaTest", patient.rapidCoronaTest);
-    axios.put(`http://localhost:4000/editpatient/${patientid.patientID}`, param,{
+    axios.put(`https://quiet-springs-42138.herokuapp.com/editpatient/${patientid.patientID}`, param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }

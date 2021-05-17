@@ -55,7 +55,7 @@ export default function DrLogin(){
             // alert('Not matched user')
             // 
         // }
-        axios.get(`http://localhost:4000/doctor/${user.email}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/doctor/${user.email}`).then(res=>{
             if(res.data){
             //   localStorage.setItem("useremail",user.email)
             //   localStorage.setItem("username",res.data.name)

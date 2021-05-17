@@ -23,13 +23,13 @@ const Editdoctor = () => {
         
         
     useEffect(()=>{
-        axios.get("http://localhost:4000/doctorlist").then(res=>{
+        axios.get("https://quiet-springs-42138.herokuapp.com/doctorlist").then(res=>{
         setdoc(res.data)
         })
     },[])
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/eachDoctor/${doctorid.doctorID}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/eachDoctor/${doctorid.doctorID}`).then(res=>{
             setDoctor(res.data)
         })
     },[doctorid])
@@ -62,7 +62,7 @@ const Editdoctor = () => {
     param.append("email", doctor.email);
     param.append("password", doctor.password);
     param.append("specialist", doctor.specialist);
-    axios.put(`http://localhost:4000/editdoctor/${doctorid.doctorID}`, param,{
+    axios.put(`https://quiet-springs-42138.herokuapp.com/editdoctor/${doctorid.doctorID}`, param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }

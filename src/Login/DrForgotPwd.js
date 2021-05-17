@@ -36,7 +36,7 @@ export default function DrForgotPwd() {
     })
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/doctor/${user.email}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/doctor/${user.email}`).then(res=>{
             setdoctor(res.data)
             console.log("doctor password" , res.data)
         })
@@ -56,7 +56,7 @@ export default function DrForgotPwd() {
         param.append("email" , user.email)
         param.append("password" , doctor.password)
         param.append("name" , doctor.name)
-        axios.post("http://localhost:4000/mail", param,{
+        axios.post("https://quiet-springs-42138.herokuapp.com/mail", param,{
             headers:{
 
                 'content-Type': 'application/x-www-form-urlencoded'
@@ -86,7 +86,7 @@ export default function DrForgotPwd() {
                 <Grid align='center' className={classes.root}>
                      <Avatar style={avatarStyle}><LockIcon/></Avatar>
                     <h5>Forgot Your Password ?</h5>
-                    <small>No worries! Enter your email and we will send you a link on your registered email.</small><br /><br/>
+                    <small>No worries! Enter your email and we will send your password on your registered email.</small><br /><br/>
                 </Grid><br/>
                 <TextField label='Email' className={classes.emailId} placeholder='Enter Email id' value={user.email} name="email" onChange={handleChange} type="email" fullWidth required/>            
                 <Button type='button' onClick={handleClick} color='primary' variant="contained" style={btnstyle} fullWidth>Send Request</Button>

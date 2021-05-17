@@ -81,7 +81,7 @@ export default function DoctorHome(props) {
 },[userEmail])
 
   useEffect(()=>{
-    axios.get(`http://localhost:4000/selectedpatient/${props.profileid}`).then(res=>{
+    axios.get(`https://quiet-springs-42138.herokuapp.com/selectedpatient/${props.profileid}`).then(res=>{
       setUsers(res.data)
     })
   }, []);

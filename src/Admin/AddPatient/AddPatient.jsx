@@ -30,7 +30,7 @@ const AddPatient = () => {
         }
     },[islogin])
     useEffect(()=>{
-        axios.get("http://localhost:4000/doctorlist").then(res=>{
+        axios.get("https://quiet-springs-42138.herokuapp.com/doctorlist").then(res=>{
             setdoc(res.data)
         })
     },[])
@@ -73,7 +73,7 @@ const AddPatient = () => {
    param.append("bloodPressure", patient.bloodPressure);
    param.append("bodyTemp", patient.bodyTemp);
    param.append("rapidCoronaTest", patient.rapidCoronaTest);
-    axios.post("http://localhost:4000/newpatientadd", param,{
+    axios.post("https://quiet-springs-42138.herokuapp.com/newpatientadd", param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }

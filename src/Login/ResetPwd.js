@@ -57,11 +57,11 @@ export default function ResetPwd(props) {
             // alert('Not matched user')
             // 
         // }
-        axios.get(`http://localhost:4000/eachDoctor/${drID}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/eachDoctor/${drID}`).then(res=>{
             if(user.password==res.data.password){
                 if(user.password!=user.cpassword){
                     param.append("password", user.cpassword);
-                    axios.put(`http://localhost:4000/editdoctorpassword/${drID}`, param,{
+                    axios.put(`https://quiet-springs-42138.herokuapp.com/editdoctorpassword/${drID}`, param,{
                     headers:{
                         'content-Type': 'application/x-www-form-urlencoded'
                     }

@@ -21,12 +21,12 @@ export default function Eachdaypdf(props) {
     const [patient,setpatient] = useState({})
     const [eachdaypatient,seteachdaypatient] = useState({})
     useEffect(()=>{
-        axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/patient/${patientid}`).then(res=>{
           setpatient(res.data)
         })
       },[])
       useEffect(()=>{
-        axios.get(`http://localhost:4000/eachdaypatient/${eachdaypatientid}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/eachdaypatient/${eachdaypatientid}`).then(res=>{
             seteachdaypatient(res.data)
         })
       },[])

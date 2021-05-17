@@ -31,12 +31,12 @@ const PrintPdf = (props) => {
     }
   },[userEmail])
   useEffect(()=>{
-    axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
+    axios.get(`https://quiet-springs-42138.herokuapp.com/patient/${patientid}`).then(res=>{
         setpatient(res.data)
       })
   },[])
   useEffect(()=>{
-    axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
+    axios.get(`https://quiet-springs-42138.herokuapp.com/dailypatientdetails/${patientid}`).then(res=>{
       setpatientd(res.data)
     })
   },[])

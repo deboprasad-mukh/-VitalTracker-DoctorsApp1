@@ -11,7 +11,7 @@ export default function Editdailypatientdetails(props) {
     // const [doc,setdoc]= useState([])
     const param=new URLSearchParams();
     useEffect(()=>{
-        axios.get(`http://localhost:4000/eachdaypatient/${eachdaypatientid}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/eachdaypatient/${eachdaypatientid}`).then(res=>{
           setPatient(res.data)
         })
       },[])
@@ -45,7 +45,7 @@ console.log(patient)
         param.append("date", patient.date);
         param.append("patientid", patient.patientid);
         
-        axios.put(`http://localhost:4000/editdailypatientdetails/${eachdaypatientid}`, param,{
+        axios.put(`https://quiet-springs-42138.herokuapp.com/editdailypatientdetails/${eachdaypatientid}`, param,{
             headers:{
                 'content-Type': 'application/x-www-form-urlencoded'
             }

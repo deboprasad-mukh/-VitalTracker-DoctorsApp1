@@ -89,13 +89,13 @@ export default function View(props) {
     },[userEmail])
 
     useEffect(()=>{
-      axios.get(`http://localhost:4000/patient/${patientid}`).then(res=>{
+      axios.get(`https://quiet-springs-42138.herokuapp.com/patient/${patientid}`).then(res=>{
         setpatient(res.data)
       })
     },[])
 
     useEffect(()=>{
-      axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
+      axios.get(`https://quiet-springs-42138.herokuapp.com/dailypatientdetails/${patientid}`).then(res=>{
         setdaywisedetails(res.data)
       })
     },[])
@@ -125,13 +125,13 @@ export default function View(props) {
       param.append("rapidCoronaTest", update.rapidCoronaTest);
       
       
-      axios.post("http://localhost:4000/adddailyPatient", param,{
+      axios.post("https://quiet-springs-42138.herokuapp.com/adddailyPatient", param,{
         headers:{
             'content-Type': 'application/x-www-form-urlencoded'
         }
         }).then(res=>{
         
-          axios.get(`http://localhost:4000/dailypatientdetails/${patientid}`).then(res=>{
+          axios.get(`https://quiet-springs-42138.herokuapp.com/dailypatientdetails/${patientid}`).then(res=>{
           setdaywisedetails(res.data)
           })
         })

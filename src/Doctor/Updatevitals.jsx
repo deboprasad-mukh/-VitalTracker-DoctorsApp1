@@ -10,7 +10,7 @@ export default function Updatevitals(props) {
     // const [doc,setdoc]= useState([])
     const param=new URLSearchParams();
     useEffect(()=>{
-        axios.get(`http://localhost:4000/patient/${props.patientid}`).then(res=>{
+        axios.get(`https://quiet-springs-42138.herokuapp.com/patient/${props.patientid}`).then(res=>{
           setPatient(res.data)
         })
       },[])
@@ -41,7 +41,7 @@ export default function Updatevitals(props) {
         param.append("bloodPressure", patient.bloodPressure);
         param.append("bodyTemp", patient.bodyTemp);
         param.append("rapidCoronaTest", patient.rapidCoronaTest);
-        axios.put(`http://localhost:4000/editpatientbydoctor/${props.patientid}`, param,{
+        axios.put(`https://quiet-springs-42138.herokuapp.com/editpatientbydoctor/${props.patientid}`, param,{
             headers:{
                 'content-Type': 'application/x-www-form-urlencoded'
             }

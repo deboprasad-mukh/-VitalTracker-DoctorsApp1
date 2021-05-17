@@ -24,7 +24,7 @@ const islogin = localStorage.getItem("admidlogin")
         }
     },[islogin])
 useEffect(()=>{
-    axios.get("http://localhost:4000/doctorlist").then(res=>{
+    axios.get("https://quiet-springs-42138.herokuapp.com/doctorlist").then(res=>{
         setDbdoctor(res.data)
         console.log(res.data)
     })
@@ -54,7 +54,7 @@ const handleSubmit=()=>{
         return
     }
 
-    axios.get(`http://localhost:4000/doctor/${doctor.email}`).then(res=>{
+    axios.get(`https://quiet-springs-42138.herokuapp.com/doctor/${doctor.email}`).then(res=>{
         if(res.data){
             window.alert("already reg")
         }
@@ -65,7 +65,7 @@ const handleSubmit=()=>{
         param.append("email", doctor.email);
         param.append("password", doctor.password);
         param.append("specialist", doctor.specialist);
-        axios.post("http://localhost:4000/newDoctor", param,{
+        axios.post("https://quiet-springs-42138.herokuapp.com/newDoctor", param,{
         headers:{
         'content-Type': 'application/x-www-form-urlencoded'
         }
